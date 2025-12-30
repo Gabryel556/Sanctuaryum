@@ -1,0 +1,212 @@
+.profile-container {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    align-items: start;
+}
+
+.profile-header {
+    background: rgba(20, 20, 25, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 30px;
+    text-align: center;
+    position: sticky; 
+    top: 100px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.profile-avatar {
+    width: 120px; 
+    height: 120px;
+    border-radius: 24px;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.username { 
+    font-size: 1.8rem; 
+    font-weight: 800; 
+    color: white; 
+    margin: 0 0 5px 0; 
+}
+
+.verified-badge { 
+    color: var(--neon-blue); 
+    margin-left: 8px; 
+    font-size: 1rem; 
+}
+
+.user-tag { 
+    color: #888; 
+    font-family: 'Courier New', monospace; 
+    font-size: 0.9rem; 
+    margin-bottom: 20px; 
+    display: block; 
+}
+
+.profile-actions { 
+    display: flex; 
+    gap: 10px; 
+    justify-content: center; 
+    margin-bottom: 25px; 
+}
+
+.btn-action {
+    background: rgba(255,255,255,0.05); 
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 12px; 
+    font-weight: 600; 
+    cursor: pointer;
+}
+
+.btn-action.primary { 
+    background: var(--neon-purple); 
+    border-color: var(--neon-purple); 
+}
+
+.user-bio { 
+    color: #ccc; 
+    font-size: 0.95rem; 
+    line-height: 1.5; 
+    background: rgba(0,0,0,0.3); 
+    padding: 15px; 
+    border-radius: 12px; 
+}
+
+.profile-body { 
+    background: transparent; 
+}
+
+.profile-tabs {
+    display: flex; 
+    gap: 20px; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    background: none; 
+    border: none; 
+    color: #666; 
+    padding: 15px 0; 
+    font-size: 1rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    position: relative;
+}
+
+.tab-btn.active { 
+    color: white; 
+}
+
+.tab-btn.active::after {
+    content: ''; 
+    position: absolute; 
+    bottom: -1px; 
+    left: 0; 
+    width: 100%; 
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+    animation: laserLoad 0.3s ease-out forwards;
+}
+
+.post-card {
+    background: #131316; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    border-radius: 16px; 
+    padding: 20px; 
+    margin-bottom: 20px;
+}
+
+.post-header { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    margin-bottom: 15px; 
+}
+
+.post-avatar { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 10px; 
+}
+
+.post-image { 
+    width: 100%; 
+    border-radius: 12px; 
+    margin-top: 15px; 
+    border: 1px solid rgba(255,255,255,0.05); 
+}
+
+.servers-mode {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.server-card {
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    padding: 15px;
+    background: #18181b; 
+    border: 1px solid #27272a; 
+    border-radius: 12px;
+    transition: transform 0.2s;
+}
+.server-card:hover { 
+    transform: translateY(-2px); 
+    border-color: #3f3f46; 
+}
+
+.server-icon {
+    width: 50px; 
+    height: 50px; 
+    background-color: #333; 
+    border-radius: 10px;
+    background-size: cover; 
+    flex-shrink: 0;
+}
+
+.server-info { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.server-name { 
+    font-weight: bold; 
+    color: white; 
+    font-size: 1rem; 
+}
+
+.server-role { 
+    font-size: 0.8rem; 
+    color: #888; 
+    margin-top: 2px; 
+}
+
+.server-role.is-admin { 
+    color: #ffd700; 
+    font-weight: 500; 
+}
+
+@media (max-width: 850px) {
+    .profile-container { 
+        grid-template-columns: 1fr; 
+    }
+
+    .profile-header { 
+        position: static; 
+        margin-bottom: 30px; 
+    }
+
+}

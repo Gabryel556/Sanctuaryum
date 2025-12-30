@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Sanctuaryum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="compass.css"> 
+    <link rel="stylesheet" href="settings.css"> 
+</head>
+<body>
+    
+    <nav class="glass-nav">
+        <div class="brand-logo" style="font-size: 1.5rem;">SANCTUARYUM</div>
+        <div class="nav-links">
+            <a href="compass.html" class="nav-item">
+                <i class="fa-solid fa-compass"></i> <span class="nav-text">Explorar</span>
+            </a>
+
+            <a href="server.html" class="nav-item">
+                <i class="fa-solid fa-message"></i> <span class="nav-text">Chat</span>
+            </a>
+
+            <a href="music.html" class="nav-item">
+                <i class="fa-solid fa-music"></i> <span class="nav-text">Waves</span>
+            </a>
+                    
+            <a href="profile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i> <span class="nav-text">Perfil</span>
+            </a>
+            
+            <a href="settings.html" class="nav-item active">
+                <i class="fa-solid fa-gear"></i> <span class="nav-text">Config</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="settings-container">
+        <aside class="settings-sidebar">
+            <h2 style="margin-bottom: 20px; font-size: 1.2rem;">Ajustes</h2>
+            <button id="btn-account" class="sidebar-btn active" onclick="showSection('account')"><i class="fa-solid fa-user-shield"></i> Conta & Segurança</button>
+            <button id="btn-profile-edit" class="sidebar-btn" onclick="showSection('profile-edit')"><i class="fa-solid fa-palette"></i> Aparência do Perfil</button>
+            <button id="btn-privacy" class="sidebar-btn" onclick="showSection('privacy')"><i class="fa-solid fa-lock"></i> Privacidade</button>
+            <button id="btn-connections" class="sidebar-btn" onclick="showSection('connections')"><i class="fa-brands fa-spotify"></i> Conexões</button>
+            <hr style="border-color: #27272a; margin: 20px 0;">
+            <button class="sidebar-btn logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
+        </aside>
+
+        <main class="settings-content">
+            <section id="section-account" class="settings-section">
+                <h2 class="section-title">Conta & Segurança</h2>
+                <div class="setting-card">
+                    <h3>Email</h3>
+                    <div class="input-group">
+                        <input type="email" value="neo@sanctuaryum.com" disabled style="color:#888;">
+                        <button class="btn-secondary">Mudar</button>
+                    </div>
+                </div>
+                <div class="setting-card">
+                    <h3>Senha</h3>
+                    <button class="btn-secondary">Alterar Senha</button>
+                </div>
+                <div class="setting-card" style="border-color: var(--brand-gamer);">
+                    <h3>Autenticação de Dois Fatores (2FA)</h3>
+                    <p style="color:#ccc; font-size:0.9rem; margin-bottom:15px;">Proteja sua conta com uma camada extra de segurança.</p>
+                    <button class="btn-primary badge-gamer">Ativar 2FA</button>
+                </div>
+            </section>
+
+            <section id="section-profile-edit" class="settings-section hidden">
+                <h2 class="section-title">Aparência do Perfil</h2>
+                <div class="setting-card">
+                    <h3>Vibe Principal</h3>
+                    <p style="color:#ccc; font-size:0.9rem; margin-bottom:15px;">Isso define como seu perfil aparece nas buscas.</p>
+                    <div class="radio-group">
+                        <label class="radio-option selected">
+                            <input type="radio" name="vibe" checked>
+                            <i class="fa-solid fa-heart" style="color:var(--brand-secondary)"></i> <span>Social / Lifestyle</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vibe">
+                            <i class="fa-solid fa-gamepad" style="color:var(--brand-gamer)"></i> <span>Gamer / Tech</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+</html>

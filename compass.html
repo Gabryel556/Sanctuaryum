@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanctuaryum - Explore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="compass.css">
+    <link rel="stylesheet" href="modals.css">
+    <link rel="stylesheet" href="ai.css">
+</head>
+<body>
+    
+    <nav class="glass-nav">
+        <div class="brand-logo" style="font-size: 1.5rem;">SANCTUARYUM</div>
+        
+        <div class="nav-links">
+            <button class="nav-btn-create" onclick="openModal()">
+                <i class="fa-solid fa-plus"></i> <span class="nav-text">Criar</span>
+            </button>
+            
+            <a href="compass.html" class="nav-item active">
+                <i class="fa-solid fa-compass"></i> <span class="nav-text">Explorar</span>
+            </a>
+
+            <a href="server.html" class="nav-item">
+                <i class="fa-solid fa-message"></i> <span class="nav-text">Chat</span>
+            </a>
+
+            <a href="music.html" class="nav-item">
+                <i class="fa-solid fa-music"></i> <span class="nav-text">Waves</span>
+            </a>
+            
+            <a href="profile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i> <span class="nav-text">Perfil</span>
+            </a>
+            
+            <a href="settings.html" class="nav-item">
+                <i class="fa-solid fa-gear"></i> <span class="nav-text">Config</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="compass-container">
+        <header class="compass-header">
+            
+            <div class="header-hero">
+                
+                <div class="mode-switch-container">
+                    <button class="mode-btn active" id="btn-social" onclick="setMode('social')">
+                        <i class="fa-solid fa-heart"></i> Social
+                    </button>
+                    <button class="mode-btn" id="btn-community" onclick="setMode('community')">
+                        <i class="fa-solid fa-gamepad"></i> Comunidade
+                    </button>
+                    <div class="switch-bg"></div>
+                </div>
+
+                <h1 id="hero-title">Seu mundo, <span class="gradient-text">criado por você.</span></h1>
+                <p id="hero-subtitle">Fotos, momentos e música em harmonia.</p>
+                
+                <div class="search-bar-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="server-search" placeholder="Buscar no Sanctuaryum...">
+                </div>
+
+                <div class="filter-tags" id="filter-container">
+                    </div>
+            </div>
+        </header>
+
+        <main class="compass-main">
+            <section class="server-section">
+                <h2 class="section-title" id="featured-title">Em Alta</h2>
+                <div class="server-grid" id="grid-featured"></div>
+            </section>
+
+            <section class="server-section">
+                <h2 class="section-title" id="feed-title">Para Você</h2>
+                <div class="server-grid" id="grid-general"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="creation-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2>Criar Novo</h2>
+                <div class="modal-tabs">
+                    <button class="m-tab active" onclick="switchModalTab('post')">Post Social</button>
+                    <button class="m-tab" onclick="switchModalTab('server')">Servidor</button>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="upload-area"><i class="fa-solid fa-cloud-arrow-up"></i><br>Arraste arquivos ou clique</div>
+             </div>
+        </div>
+    </div>
+
+    <div id="ai-fab" class="ai-fab idle"><i class="fa-solid fa-sparkles"></i></div>
+    <div id="ai-window" class="ai-window">
+        <div class="ai-header">
+            <div class="ai-title">N.E.X.U.S. AI</div>
+            <button id="ai-close" class="ai-close"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+        <div class="ai-body" id="ai-messages"></div>
+        <div class="ai-footer">
+            <input type="text" id="ai-input" placeholder="Pergunte ao Nexus...">
+            <button id="ai-send" class="ai-send"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="api.js"></script> 
+    <script src="modals.js"></script>
+    <script src="ai.js"></script>
+    <script src="compass.js"></script>
+</body>
+</html>

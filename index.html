@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanctuaryum - O Refúgio Digital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+
+    <div class="landing-container">
+        <div class="glowing-orb"></div>
+
+        <div class="landing-content">
+            <div class="landing-logo">SANCTUARYUM</div>
+            
+            <p class="landing-subtitle">
+                Onde comunidades seguras e identidade digital se encontram. <br>
+                Sem algoritmos tóxicos. Apenas você e sua tribo.
+            </p>
+
+            <div class="btn-group" id="auth-buttons">
+                <a href="login.html?mode=login" class="btn-landing btn-login">
+                    <i class="fa-solid fa-right-to-bracket"></i> Entrar
+                </a>
+                
+                <a href="login.html?mode=register" class="btn-landing btn-register">
+                    <i class="fa-solid fa-rocket"></i> Criar Conta
+                </a>
+            </div>
+            
+            <div id="logged-buttons" class="hidden">
+                <a href="compass.html" class="btn-landing btn-register">
+                    <i class="fa-solid fa-compass"></i> Abrir Sanctuaryum
+                </a>
+                <button onclick="logoutFromLanding()" class="btn-link">
+                    Trocar de conta
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="landing.js"></script>
+</body>
+</html>

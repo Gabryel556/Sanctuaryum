@@ -1,0 +1,228 @@
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-box {
+    background: #18181b;
+    width: 500px;
+    border-radius: 16px;
+    border: 1px solid #27272a;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.hidden .modal-box { 
+    transform: scale(0.9); 
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px; 
+    right: 15px;
+    background: none; 
+    border: none;
+    color: #666; 
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.modal-close:hover { 
+    color: white; 
+}
+
+.modal-header {
+    background: #202024;
+    padding: 20px 20px 0 20px;
+    text-align: center;
+}
+
+.modal-header h2 { 
+    margin: 0 0 15px 0; 
+    font-size: 1.2rem; 
+}
+
+.modal-tabs { 
+    display: flex; 
+    gap: 10px; 
+    padding-bottom: 15px; 
+}
+
+.m-tab {
+    flex: 1;
+    background: none; 
+    border: none;
+    padding: 10px;
+    color: #888;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.m-tab:hover {
+    color: #ccc; 
+}
+
+.m-tab.active { 
+    color: white; 
+    border-bottom-color: var(--brand-primary); 
+}
+
+.modal-content { 
+    padding: 25px; 
+}
+
+.tab-content.hidden { 
+    display: none; 
+}
+
+.upload-area {
+    border: 2px dashed #333;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    color: #666;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.upload-area:hover { 
+    border-color: var(--brand-primary); 
+    color: var(--brand-primary); 
+    background: rgba(99,102,241,0.05); 
+}
+
+.upload-area i { 
+    font-size: 2rem; 
+    margin-bottom: 10px; 
+}
+
+textarea {
+    width: 100%;
+    background: #27272a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    color: white;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-group-modal { 
+    margin-bottom: 15px; 
+}
+
+.input-group-modal label { 
+    display: block; 
+    color: #888; 
+    font-size: 0.85rem; 
+    margin-bottom: 8px; 
+}
+
+.input-group-modal input {
+    width: 100%;
+    background: #27272a;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 6px;
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.category-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+}
+
+.cat-btn {
+    background: #27272a;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 6px;
+    color: #ccc;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px;
+}
+
+.cat-btn.selected { 
+    background: var(--brand-gamer); 
+    color: black; 
+    border-color: var(--brand-gamer); 
+    font-weight: bold; 
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel { 
+    background: transparent; 
+    color: #888; 
+    border: none; 
+    cursor: pointer; 
+    font-weight: 500; 
+}
+
+.btn-confirm {
+    background: var(--brand-secondary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-confirm.server-color { 
+    background: var(--brand-gamer); 
+    color: black; 
+}
+
+.nav-btn-create {
+    background: var(--brand-primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    transition: 0.2s;
+    box-shadow: 0 0 10px rgba(99,102,241, 0.3);
+}
+.nav-btn-create:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 0 15px rgba(99,102,241, 0.5); 
+}

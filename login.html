@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - Sanctuaryum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-visual">
+            <div class="visual-content">
+                <div class="logo-large">SANCTUARYUM</div>
+                <h1>O refúgio seguro para<br>sua vida digital.</h1>
+                <p>Junte-se a milhares de criadores e gamers em uma rede focada em privacidade e segurança.</p>
+                
+                <div class="security-badge">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Protegido por SancGuard™ Encryption</span>
+                </div>
+            </div>
+            <div class="glowing-orb"></div>
+        </div>
+
+        <div class="auth-form-wrapper">
+            <div class="form-box" id="login-box">
+                <h2>Bem-vindo de volta</h2>
+                <p class="subtitle">Insira suas credenciais para acessar o Nexus.</p>
+
+                <form onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Senha" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <label class="remember-me">
+                            <input type="checkbox"> Lembrar de mim
+                        </label>
+                        <a href="#" class="forgot-pass">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="btn-auth">Entrar <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+
+                <div class="divider"><span>ou continue com</span></div>
+
+                <div class="social-login">
+                    <button class="btn-social"><i class="fa-brands fa-google"></i></button>
+                    <button class="btn-social"><i class="fa-brands fa-apple"></i></button>
+                    <button class="btn-social"><i class="fa-brands fa-microsoft"></i></button>
+                </div>
+
+                <p class="switch-auth">
+                    Não tem uma conta? <a href="#" onclick="toggleMode('register')">Criar conta</a>
+                </p>
+            </div>
+
+            <div class="form-box hidden" id="register-box">
+                <h2>Criar Identidade</h2>
+                <p class="subtitle">Sua jornada começa aqui.</p>
+
+                <form onsubmit="handleRegister(event)">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Nome de Usuário" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Senha Forte" required>
+                    </div>
+
+                    <div class="terms-text">
+                        Ao criar uma conta, você aceita nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.
+                    </div>
+
+                    <button type="submit" class="btn-auth btn-register">Criar Conta</button>
+                </form>
+
+                <p class="switch-auth">
+                    Já é um habitante? <a href="#" onclick="toggleMode('login')">Entrar</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
