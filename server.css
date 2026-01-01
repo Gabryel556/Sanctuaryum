@@ -261,8 +261,9 @@
 }
 
 .attach-btn {
-    color: var(--neon-blue);
-    border-radius: 12px;
+    background: var(--neon-blue);
+    color: white;
+    border-radius: 22px;
 }
 
 .input-icons { 
@@ -583,6 +584,7 @@
     }
 
 }
+
 
 
 
