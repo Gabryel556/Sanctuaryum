@@ -253,7 +253,7 @@
     font-size: 1rem;
 }
 
-.input-icons,{ 
+.input-icons { 
     color: #777; 
     cursor: pointer; 
     transition: 0.2s; 
@@ -583,6 +583,7 @@
     }
 
 }
+
 
 
 
