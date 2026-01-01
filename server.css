@@ -266,7 +266,7 @@
 }
 
 .input-icons i:hover, .attach-btn:hover { 
-    color: white; 
+    color: blue; 
 }
 
 .members-sidebar {
@@ -578,3 +578,4 @@
     }
 
 }
+
