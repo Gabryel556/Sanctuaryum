@@ -254,7 +254,7 @@
 }
 
 .input-icons, .attach-btn { 
-    color: #888; 
+    color: #777; 
     cursor: pointer; 
     transition: 0.2s; 
     font-size: 1.1rem; 
@@ -576,4 +576,5 @@
     .channels-sidebar { 
         display: none; 
     }
+
 }
