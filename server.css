@@ -253,11 +253,15 @@
     font-size: 1rem;
 }
 
-.input-icons, .attach-btn { 
+.input-icons,{ 
     color: #777; 
     cursor: pointer; 
     transition: 0.2s; 
     font-size: 1.1rem; 
+}
+
+.attach-btn {
+    color: var(--neon-blue);
 }
 
 .input-icons { 
@@ -266,7 +270,7 @@
 }
 
 .input-icons i:hover, .attach-btn:hover { 
-    color: blue; 
+    color: white; 
 }
 
 .members-sidebar {
@@ -578,4 +582,5 @@
     }
 
 }
+
 
