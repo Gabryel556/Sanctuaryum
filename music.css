@@ -143,6 +143,7 @@
     display: inline-flex; 
     align-items: center; 
     gap: 10px;
+    animation: eletricShine 3s linear infinite;
 }
 
 .play-hero:hover { 
@@ -443,4 +444,5 @@
     background: var(--neon-purple);
     color: white !important;
     box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+
 }
