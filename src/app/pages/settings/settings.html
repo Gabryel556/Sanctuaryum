@@ -16,7 +16,7 @@
             </button>
 
             <button class="nav-item" [class.active]="activeTab === 'connections'" (click)="setActiveTab('connections')">
-                <i class="fa-brands fa-spotify"></i> Conexões
+                <i class="fa-solid fa-link"></i> Conexões
             </button>
         </nav>
 
@@ -60,13 +60,157 @@
             </div>
         </div>
 
-        <div class="content-card empty-card" *ngIf="activeTab === 'appearance'">
+        <div class="content-card" *ngIf="activeTab === 'appearance'">
+            <div class="section-header">
+                <span class="vertical-bar"></span>
+                <h2>Aparência do Perfil</h2>
+            </div>
+
+            <div class="setting-group">
+                <label>Tema do Perfil</label>
+                <div class="theme-grid">
+                    <div class="theme-card active">
+                        <div class="theme-preview"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        <div class="theme-info">
+                            <span>Orquídea Noturna</span>
+                            <span class="theme-badge active">Ativo</span>
+                        </div>
+                    </div>
+
+                    <div class="theme-card">
+                        <div class="theme-preview"
+                            style="background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);"></div>
+                        <div class="theme-info">
+                            <span>Fogo e Gelo</span>
+                            <span>Premium</span>
+                        </div>
+                    </div>
+
+                    <div class="theme-card">
+                        <div class="theme-preview"
+                            style="background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);"></div>
+                        <div class="theme-info">
+                            <span>Céu Neon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>Layout do Perfil</label>
+                <p class="setting-description">Escolha como suas informações são organizadas.</p>
+
+                <div class="layout-options">
+                    <div class="layout-card">
+                        <div class="layout-preview">
+                            <div class="layout-item top"></div>
+                            <div class="layout-item bottom"></div>
+                        </div>
+                        <div class="layout-info">
+                            <h4>Padrão</h4>
+                            <span class="layout-badge active">Selecionado</span>
+                        </div>
+                    </div>
+
+                    <div class="layout-card">
+                        <div class="layout-preview">
+                            <div class="layout-item large"></div>
+                            <div class="layout-item side"></div>
+                        </div>
+                        <div class="layout-info">
+                            <h4>Expansivo</h4>
+                        </div>
+                    </div>
+
+                    <div class="layout-card">
+                        <div class="layout-preview">
+                            <div class="layout-item banner"></div>
+                            <div class="layout-item info"></div>
+                        </div>
+                        <div class="layout-info">
+                            <h4>Estilizado</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="content-card empty-card" *ngIf="activeTab === 'privacy'">
+        <div class="content-card" *ngIf="activeTab === 'privacy'">
+            <div class="section-header">
+                <span class="vertical-bar"></span>
+                <h2>Privacidade</h2>
+            </div>
+
+            <div class="setting-group">
+                <label>Visibilidade do Perfil</label>
+                <p class="setting-description">Quem pode ver suas postagens e informações básicas.</p>
+                <select class="dark-input select-input">
+                    <option value="public">Público (Todos no Sanctuaryum)</option>
+                    <option value="friends">Apenas Conexões</option>
+                    <option value="private">Privado</option>
+                </select>
+            </div>
+
+            <div class="setting-group toggle-group">
+                <div class="toggle-info">
+                    <label>Status do Sanctuary Waves</label>
+                    <p class="setting-description">Exibir a música que você está ouvindo no seu perfil e no chat.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <div class="setting-group toggle-group">
+                <div class="toggle-info">
+                    <label>Recibos de Leitura (Cofre)</label>
+                    <p class="setting-description">Permitir que os outros saibam quando você leu uma mensagem.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
 
-        <div class="content-card empty-card" *ngIf="activeTab === 'connections'">
+        <div class="content-card" *ngIf="activeTab === 'connections'">
+            <div class="section-header">
+                <span class="vertical-bar"></span>
+                <h2>Conexões Externas</h2>
+            </div>
+            <p class="setting-description mb-4">Vincule contas de outras plataformas para exibir no seu perfil e
+                encontrar amigos.</p>
+
+            <div class="connections-list">
+                <div class="connection-item">
+                    <div class="conn-icon steam"><i class="fa-brands fa-steam"></i></div>
+                    <div class="conn-details">
+                        <h4>Steam</h4>
+                        <p>Sincronize seus jogos e status</p>
+                    </div>
+                    <button class="btn-secondary">Conectar</button>
+                </div>
+
+                <div class="connection-item">
+                    <div class="conn-icon github"><i class="fa-brands fa-github"></i></div>
+                    <div class="conn-details">
+                        <h4>GitHub</h4>
+                        <p>Exiba seus repositórios no perfil</p>
+                    </div>
+                    <button class="btn-secondary">Conectar</button>
+                </div>
+
+                <div class="connection-item">
+                    <div class="conn-icon twitch"><i class="fa-brands fa-twitch"></i></div>
+                    <div class="conn-details">
+                        <h4>Twitch</h4>
+                        <p>Alerte quando estiver em live</p>
+                    </div>
+                    <button class="btn-secondary">Conectar</button>
+                </div>
+            </div>
         </div>
 
     </main>
