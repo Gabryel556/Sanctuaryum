@@ -1,0 +1,73 @@
+<div class="settings-layout">
+    <aside class="settings-sidebar">
+        <h3 class="sidebar-header">AJUSTES</h3>
+
+        <nav class="sidebar-nav">
+            <button class="nav-item" [class.active]="activeTab === 'account'" (click)="setActiveTab('account')">
+                <i class="fa-solid fa-user-shield"></i> Conta & Segurança
+            </button>
+
+            <button class="nav-item" [class.active]="activeTab === 'appearance'" (click)="setActiveTab('appearance')">
+                <i class="fa-solid fa-palette"></i> Aparência do Perfil
+            </button>
+
+            <button class="nav-item" [class.active]="activeTab === 'privacy'" (click)="setActiveTab('privacy')">
+                <i class="fa-solid fa-lock"></i> Privacidade
+            </button>
+
+            <button class="nav-item" [class.active]="activeTab === 'connections'" (click)="setActiveTab('connections')">
+                <i class="fa-brands fa-spotify"></i> Conexões
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <hr class="divider">
+            <button class="nav-item logout-btn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+            </button>
+        </div>
+    </aside>
+
+    <main class="settings-content">
+
+        <div class="content-card" *ngIf="activeTab === 'account'">
+            <div class="section-header">
+                <span class="vertical-bar"></span>
+                <h2>Conta & Segurança</h2>
+            </div>
+
+            <div class="setting-group">
+                <label>Email</label>
+                <div class="input-row">
+                    <input type="email" value="neo@sanctuaryum.com" readonly class="dark-input">
+                    <button class="btn-secondary">Mudar</button>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>Senha</label>
+                <div class="input-row">
+                    <button class="btn-secondary">Alterar Senha</button>
+                </div>
+            </div>
+
+            <div class="setting-group box-highlight">
+                <div class="box-text">
+                    <label>Autenticação de Dois Fatores (2FA)</label>
+                    <p>Proteja sua conta com uma camada extra de segurança.</p>
+                </div>
+                <button class="btn-primary">Ativar 2FA</button>
+            </div>
+        </div>
+
+        <div class="content-card empty-card" *ngIf="activeTab === 'appearance'">
+        </div>
+
+        <div class="content-card empty-card" *ngIf="activeTab === 'privacy'">
+        </div>
+
+        <div class="content-card empty-card" *ngIf="activeTab === 'connections'">
+        </div>
+
+    </main>
+</div>

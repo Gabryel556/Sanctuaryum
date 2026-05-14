@@ -1,0 +1,135 @@
+<div class="server-container">
+    
+    <aside class="channels-sidebar">
+        <div class="server-header">
+            <h2 id="server-name">{{ serverName }}</h2>
+        </div>
+        
+        <div class="channels-list">
+            <div class="channel-category">CANAIS</div>
+            <div *ngFor="let channel of channels" 
+                 class="channel-btn" 
+                 [class.active]="channel.active"
+                 (click)="switchChannel(channel)">
+                <i class="channel-icon" 
+                   [ngClass]="channel.type === 'voice' ? 'fa-solid fa-microphone-lines' : 'fa-solid fa-cube'">
+                </i>
+                {{ channel.name }}
+            </div>
+        </div>
+
+        <div class="user-panel">
+            <div class="user-mini-avatar" [style.backgroundImage]="'url(' + currentUser.avatar + ')'"></div>
+            <div class="user-mini-info">
+                <div class="mini-name">{{ currentUser.username }}</div>
+                <div class="mini-tag">{{ currentUser.tag }}</div>
+            </div>
+            <div class="user-mini-icons">
+                <i class="fa-solid fa-microphone-slash"></i>
+                <i class="fa-solid fa-gear"></i>
+            </div>
+        </div>
+    </aside>
+
+    <main class="chat-area">
+        <header class="chat-header">
+            <div class="chat-header-info">
+                <i class="fa-solid fa-diamond" style="color:var(--neon-purple); font-size: 0.8rem;"></i>
+                <h3>{{ currentChannelName }}</h3>
+            </div>
+            <div class="chat-header-tools">
+                <i class="fa-solid fa-phone"></i>
+                <i class="fa-solid fa-video"></i>
+                <i class="fa-solid fa-users"></i>
+            </div>
+        </header>
+
+        <div class="messages-container" id="messages-list">
+            <div *ngFor="let msg of messages" class="message">
+                <div class="msg-avatar" [style.backgroundImage]="'url(' + msg.avatar + ')'"></div>
+                <div class="msg-content">
+                    <h4>{{ msg.username }} <span class="msg-time">{{ msg.time }}</span></h4>
+                    <div class="msg-text">{{ msg.text | decrypt }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <button class="attach-btn"><i class="fa-solid fa-plus"></i></button>
+            <input type="text" class="chat-input" 
+                   [(ngModel)]="newMessage" 
+                   (keydown.enter)="sendMessage()"
+                   placeholder="Enviar mensagem...">
+            <div class="input-icons">
+                <i class="fa-solid fa-gift"></i>
+                <i class="fa-solid fa-face-smile"></i>
+            </div>
+        </div>
+    </main>
+
+    <aside class="members-sidebar">
+        <div class="members-list-scroll">
+            <div class="role-title">ONLINE — {{ members.length }}</div>
+            
+            <div *ngFor="let member of members" class="member-item" (click)="viewProfile(member)">
+                <div class="member-avatar" [style.backgroundImage]="'url(' + member.avatar + ')'">
+                    <div class="status-dot" [ngClass]="'status-' + member.status"></div>
+                </div>
+                <div style="font-weight: 500;" [style.color]="member.color">{{ member.username }}</div>
+            </div>
+        </div>
+
+        <div class="music-player-docked" [class.collapsed]="isPlayerCollapsed">
+            <div class="player-header">
+                <span class="wave-text">WAVES</span>
+                <button class="toggle-player-btn" (click)="togglePlayer()">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="dock-album-art" [style.backgroundImage]="'url(' + currentTrack.cover + ')'"></div>
+            <div class="dock-info">
+                <div class="dock-title">{{ currentTrack.title }}</div>
+                <div class="dock-artist">{{ currentTrack.artist }}</div>
+            </div>
+            <div class="dock-progress">
+                <div class="dock-bar"><div class="dock-fill" style="width: 50%"></div></div>
+            </div>
+            <div class="dock-controls">
+                <button class="ctrl-btn small"><i class="fa-solid fa-backward-step"></i></button>
+                <button class="ctrl-btn play" (click)="togglePlay()">
+                    <i [class]="isPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play'"></i>
+                </button>
+                <button class="ctrl-btn small"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+        </div>
+    </aside>
+
+    <div class="profile-modal-overlay" *ngIf="selectedMember" (click)="closeProfile()">
+        <div class="profile-card" (click)="$event.stopPropagation()">
+            <button class="close-modal-btn" (click)="closeProfile()"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="p-banner" [style.backgroundColor]="selectedMember.color"></div>
+            <div class="p-avatar-wrapper">
+                <div class="p-avatar" [style.backgroundImage]="'url(' + selectedMember.avatar + ')'"></div>
+                <div class="p-status" [ngClass]="'status-' + selectedMember.status"></div>
+            </div>
+            
+            <div class="p-info">
+                <h2>{{ selectedMember.username }}</h2>
+                <span class="p-tag">{{ selectedMember.tag }}</span>
+                
+                <div class="p-badges">
+                    <span class="p-badge">{{ selectedMember.role }}</span>
+                </div>
+                
+                <div class="p-bio">
+                    <h3>Sobre Mim</h3>
+                    <p>{{ selectedMember.bio }}</p>
+                </div>
+
+                <button class="btn-primary" style="width: 100%; margin-top: 15px;">Enviar Mensagem</button>
+            </div>
+        </div>
+    </div>
+
+</div>

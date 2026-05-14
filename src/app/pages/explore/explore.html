@@ -1,0 +1,77 @@
+<div class="compass-container">
+    <header class="compass-header">
+        
+        <div class="header-hero">
+            
+            <div class="mode-switch-container" [ngClass]="'mode-' + currentMode">
+                <button class="mode-btn" [class.active]="currentMode === 'social'" (click)="setMode('social')">
+                    <i class="fa-solid fa-heart"></i> Social
+                </button>
+                <button class="mode-btn" [class.active]="currentMode === 'community'" (click)="setMode('community')">
+                    <i class="fa-solid fa-gamepad"></i> Comunidade
+                </button>
+                <div class="switch-bg"></div>
+            </div>
+
+            <h1 id="hero-title">{{ hero.prefix }}<span class="gradient-text">{{ hero.gradient }}</span></h1>
+            <p id="hero-subtitle">{{ hero.subtitle }}</p>
+            
+            <div class="search-bar-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" 
+                       [(ngModel)]="searchTerm" 
+                       (input)="onSearch()" 
+                       placeholder="Buscar no Sanctuaryum...">
+            </div>
+
+            <div class="filter-tags">
+                <button *ngFor="let tag of tags" 
+                        class="filter-tag" 
+                        [class.active]="activeTag === tag"
+                        (click)="filterByTag(tag)">
+                    {{ tag }}
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="compass-main">
+        <section class="server-section">
+            <h2 class="section-title">{{ hero.feedTitle }}</h2>
+            
+            <div class="server-grid">
+                <div *ngFor="let item of displayData" 
+                     class="card" 
+                     [ngClass]="currentMode === 'social' ? 'card-social' : 'card-gamer'">
+                    
+                    <ng-container *ngIf="currentMode === 'social'">
+                        <div class="banner" [style.backgroundImage]="'url(' + (item.img || '') + ')'"></div>
+                        <div class="content">
+                            <div class="title">{{ item.title }}</div>
+                            <div class="meta">
+                                <i class="fa-regular fa-heart"></i> {{ item.likes }} • {{ item.author.username }}
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="currentMode === 'community'">
+                        <div class="banner" [style.backgroundImage]="'url(' + (item.banner || '') + ')'"></div>
+                        <div class="content">
+                            <div class="icon" [style.backgroundImage]="'url(' + (item.icon || '') + ')'"></div>
+                            <div class="title">{{ item.name }}</div>
+                            <div class="meta">{{ item.members }} membros</div>
+                            <div class="tags-row">
+                                <span *ngFor="let t of item.tags" class="card-tag">#{{ t }}</span>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                </div>
+
+                <div *ngIf="displayData.length === 0" style="color: #666; padding: 20px;">
+                    Nenhum resultado encontrado.
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

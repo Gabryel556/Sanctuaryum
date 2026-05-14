@@ -1,0 +1,58 @@
+/* src/styles.css */
+
+/* Importação da Fonte Inter e FontAwesome */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+:root {
+    /* Cores Base */
+    --bg-dark: #09090b;
+    --card-bg: #131316;
+    
+    /* Cores Neon */
+    --neon-purple: #8b5cf6;
+    --neon-blue: #3b82f6;
+    --neon-pink: #ec4899;
+    --neon-green: #10b981;
+    
+    /* Mapeamentos de Marca */
+    --brand-primary: var(--neon-purple);
+    --brand-secondary: var(--neon-blue);
+    --brand-gamer: var(--neon-green);
+    
+    /* Vidro */
+    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(20, 20, 25, 0.7);
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: #ffffff;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    
+    /* O Fundo Gradiente Principal */
+    background-image: radial-gradient(circle at 50% 0%, #1e1b4b 0%, var(--bg-dark) 80%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Classes Utilitárias Globais */
+.hidden { display: none !important; }
+
+/* Botões Padrão (Usados em vários lugares) */
+.btn-primary {
+    background: var(--neon-purple);
+    color: white; border: none; padding: 12px 24px; border-radius: 8px;
+    font-weight: 700; cursor: pointer; transition: all 0.2s ease;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(139, 92, 246, 0.5); background: #7c3aed; }
