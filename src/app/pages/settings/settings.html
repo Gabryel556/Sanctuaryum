@@ -68,71 +68,42 @@
 
             <div class="setting-group">
                 <label>Tema do Perfil</label>
-                <div class="theme-grid">
-                    <div class="theme-card active">
-                        <div class="theme-preview"
-                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div class="theme-options">
+                    <label class="theme-radio">
+                        <input type="radio" name="theme" checked>
+                        <span class="custom-radio"></span>
                         <div class="theme-info">
-                            <span>Orquídea Noturna</span>
-                            <span class="theme-badge active">Ativo</span>
+                            <span class="theme-name">Orquídea Noturna</span>
+                            <span class="badge active-badge">Ativo</span>
                         </div>
-                    </div>
-
-                    <div class="theme-card">
-                        <div class="theme-preview"
-                            style="background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);"></div>
+                    </label>
+                    <label class="theme-radio">
+                        <input type="radio" name="theme">
+                        <span class="custom-radio"></span>
                         <div class="theme-info">
-                            <span>Fogo e Gelo</span>
-                            <span>Premium</span>
+                            <span class="theme-name">Fogo e Gelo</span>
+                            <span class="badge premium-badge">Premium</span>
                         </div>
-                    </div>
-
-                    <div class="theme-card">
-                        <div class="theme-preview"
-                            style="background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);"></div>
+                    </label>
+                    <label class="theme-radio">
+                        <input type="radio" name="theme">
+                        <span class="custom-radio"></span>
                         <div class="theme-info">
-                            <span>Céu Neon</span>
+                            <span class="theme-name">Céu Neon</span>
                         </div>
-                    </div>
+                    </label>
                 </div>
             </div>
 
             <div class="setting-group">
                 <label>Layout do Perfil</label>
                 <p class="setting-description">Escolha como suas informações são organizadas.</p>
-
-                <div class="layout-options">
-                    <div class="layout-card">
-                        <div class="layout-preview">
-                            <div class="layout-item top"></div>
-                            <div class="layout-item bottom"></div>
-                        </div>
-                        <div class="layout-info">
-                            <h4>Padrão</h4>
-                            <span class="layout-badge active">Selecionado</span>
-                        </div>
-                    </div>
-
-                    <div class="layout-card">
-                        <div class="layout-preview">
-                            <div class="layout-item large"></div>
-                            <div class="layout-item side"></div>
-                        </div>
-                        <div class="layout-info">
-                            <h4>Expansivo</h4>
-                        </div>
-                    </div>
-
-                    <div class="layout-card">
-                        <div class="layout-preview">
-                            <div class="layout-item banner"></div>
-                            <div class="layout-item info"></div>
-                        </div>
-                        <div class="layout-info">
-                            <h4>Estilizado</h4>
-                        </div>
-                    </div>
-                </div>
+                <select class="dark-input select-input">
+                    <option value="padrao">Padrão</option>
+                    <option value="selecionado">Selecionado</option>
+                    <option value="expansivo">Expansivo</option>
+                    <option value="estilizado">Estilizado</option>
+                </select>
             </div>
         </div>
 

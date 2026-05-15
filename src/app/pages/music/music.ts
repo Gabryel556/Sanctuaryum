@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './music.css',
 })
 export class Music {
-
+  activeTab: string = 'inicio';
 }

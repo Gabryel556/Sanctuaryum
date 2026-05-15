@@ -339,3 +339,80 @@ input:checked+.slider:before {
     font-size: 0.85rem;
     color: #a0a0b0;
 }
+
+/* Opções de Tema */
+.theme-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.theme-radio {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    background: #1a1a24;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.2s;
+}
+
+.theme-radio:hover {
+    border-color: rgba(140, 82, 255, 0.5);
+}
+
+.theme-radio input {
+    display: none;
+}
+
+.custom-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #a0a0b0;
+    display: inline-block;
+    position: relative;
+}
+
+.theme-radio input:checked+.custom-radio {
+    border-color: #8c52ff;
+}
+
+.theme-radio input:checked+.custom-radio::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #8c52ff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.theme-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.active-badge {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+}
+
+.premium-badge {
+    background: rgba(255, 152, 0, 0.2);
+    color: #ff9800;
+}

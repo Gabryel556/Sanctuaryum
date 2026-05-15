@@ -1,8 +1,14 @@
 <div class="waves-layout">
     <nav class="waves-nav">
-        <button class="waves-tab active"><i class="fa-solid fa-house"></i> Início</button>
-        <button class="waves-tab"><i class="fa-solid fa-layer-group"></i> Sua Coleção</button>
-        <button class="waves-tab artist-btn"><i class="fa-solid fa-star"></i> Seja um Artista</button>
+        <button class="waves-tab" [class.active]="activeTab === 'inicio'" (click)="activeTab = 'inicio'">
+            <i class="fa-solid fa-house"></i> Início
+        </button>
+        <button class="waves-tab" [class.active]="activeTab === 'colecao'" (click)="activeTab = 'colecao'">
+            <i class="fa-solid fa-layer-group"></i> Sua Coleção
+        </button>
+        <button class="waves-tab artist-btn">
+            <i class="fa-solid fa-star"></i> Seja um Artista
+        </button>
     </nav>
 
     <div class="waves-hero">

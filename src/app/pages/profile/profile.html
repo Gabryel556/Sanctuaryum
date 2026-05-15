@@ -13,9 +13,10 @@
 
     <main class="profile-main">
         <nav class="profile-tabs">
-            <button class="tab active">Posts</button>
-            <button class="tab">Mídia</button>
-            <button class="tab">Servidores</button>
+            <button class="tab" [class.active]="activeTab === 'posts'" (click)="activeTab = 'posts'">Posts</button>
+            <button class="tab" [class.active]="activeTab === 'midia'" (click)="activeTab = 'midia'">Mídia</button>
+            <button class="tab" [class.active]="activeTab === 'servidores'"
+                (click)="activeTab = 'servidores'">Servidores</button>
         </nav>
         <hr class="tab-divider">
 
