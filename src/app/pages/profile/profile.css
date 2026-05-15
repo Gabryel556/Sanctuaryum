@@ -1,0 +1,108 @@
+.profile-layout {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    color: #fff;
+}
+
+.profile-sidebar {
+    width: 280px;
+}
+
+.profile-card {
+    background-color: #1a1a24;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.avatar-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    background-color: #22222f;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.profile-actions .btn-primary {
+    flex: 1;
+}
+
+.btn-icon {
+    background-color: #333344;
+    color: #fff;
+    border: none;
+    width: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.profile-main {
+    flex: 1;
+}
+
+.profile-tabs {
+    display: flex;
+    gap: 2rem;
+}
+
+.profile-tabs .tab {
+    background: none;
+    border: none;
+    color: #a0a0b0;
+    font-size: 1rem;
+    cursor: pointer;
+    padding-bottom: 0.5rem;
+}
+
+.profile-tabs .tab.active {
+    color: #fff;
+    font-weight: 700;
+    border-bottom: 2px solid #8c52ff;
+}
+
+.tab-divider {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 0;
+    margin-bottom: 3rem;
+}
+
+.feed-content {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.loading-state {
+    text-align: center;
+    color: #a0a0b0;
+}
+
+.loader-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.error-msg {
+    color: #ff4a4a;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}

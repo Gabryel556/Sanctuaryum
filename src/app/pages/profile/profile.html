@@ -1,1 +1,30 @@
-<p>profile works!</p>
+<div class="profile-layout">
+    <aside class="profile-sidebar">
+        <div class="profile-card">
+            <div class="avatar-container">
+                <img src="assets/avatar-placeholder.png" alt="Avatar" class="avatar-img">
+            </div>
+            <div class="profile-actions">
+                <button class="btn-primary">Seguir</button>
+                <button class="btn-icon"><i class="fa-solid fa-envelope"></i></button>
+            </div>
+        </div>
+    </aside>
+
+    <main class="profile-main">
+        <nav class="profile-tabs">
+            <button class="tab active">Posts</button>
+            <button class="tab">Mídia</button>
+            <button class="tab">Servidores</button>
+        </nav>
+        <hr class="tab-divider">
+
+        <div class="feed-content">
+            <div class="loading-state">
+                <i class="fa-solid fa-circle-notch fa-spin loader-icon"></i>
+                <p>Carregando dados...</p>
+                <p class="error-msg">Não foi possível carregar os posts.</p>
+            </div>
+        </div>
+    </main>
+</div>

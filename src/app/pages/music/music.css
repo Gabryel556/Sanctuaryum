@@ -1,0 +1,83 @@
+.waves-layout {
+    padding: 2rem;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.waves-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.waves-tab {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #a0a0b0;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.waves-tab.active,
+.waves-tab:hover {
+    background-color: #8c52ff;
+    color: #fff;
+    border-color: #8c52ff;
+}
+
+.artist-btn {
+    border-color: #8c52ff;
+    color: #8c52ff;
+}
+
+.waves-hero {
+    background: linear-gradient(135deg, rgba(140, 82, 255, 0.1), transparent);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.hero-tag {
+    color: #ff2a7a;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.hero-subtitle {
+    color: #a0a0b0;
+    margin-bottom: 1rem;
+}
+
+.btn-play-radio {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.empty-state-text {
+    color: #a0a0b0;
+    font-size: 0.9rem;
+}
