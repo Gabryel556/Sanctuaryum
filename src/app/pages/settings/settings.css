@@ -81,6 +81,17 @@
     color: #ff6b6b;
 }
 
+.dev-link {
+    color: #a78bfa;
+    text-decoration: none;
+    margin-top: 0.5rem;
+}
+
+.dev-link:hover {
+    background: rgba(139, 92, 246, 0.1);
+    color: #c4b5fd;
+}
+
 .settings-content {
     flex: 1;
 }

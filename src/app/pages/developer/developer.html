@@ -1,0 +1,101 @@
+<div class="dev-layout">
+    <div class="dev-header">
+        <div class="dev-title-section">
+            <div class="dev-icon"><i class="fa-solid fa-robot"></i></div>
+            <div>
+                <h1>Painel de Desenvolvedor</h1>
+                <p>Crie e gerencie bots para seus servidores Sanctuaryum.</p>
+            </div>
+        </div>
+        <button class="btn-new-bot" (click)="showCreateForm = true" *ngIf="!showCreateForm">
+            <i class="fa-solid fa-plus"></i> Novo Bot
+        </button>
+    </div>
+
+    <div class="create-form" *ngIf="showCreateForm">
+        <div class="form-card">
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Criar Novo Bot</h3>
+            <div class="form-field">
+                <label>Nome do Bot</label>
+                <input type="text" [(ngModel)]="newBotName" placeholder="Ex: ModerationBot"
+                    class="dev-input">
+            </div>
+            <div class="form-actions">
+                <button class="btn-cancel" (click)="showCreateForm = false">Cancelar</button>
+                <button class="btn-create" [disabled]="!newBotName.trim() || isCreating"
+                    (click)="createBot()">
+                    <span *ngIf="!isCreating"><i class="fa-solid fa-bolt"></i> Gerar Token</span>
+                    <i *ngIf="isCreating" class="fa-solid fa-circle-notch fa-spin"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bots-list">
+        <div class="bot-card" *ngFor="let bot of bots; let i = index">
+            <div class="bot-header">
+                <div class="bot-avatar">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="bot-info">
+                    <h4>{{ bot.bot_name }}</h4>
+                    <span class="bot-status" [class.active]="bot.is_active">
+                        <i class="fa-solid fa-circle"></i>
+                        {{ bot.is_active ? 'Ativo' : 'Inativo' }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="token-section" *ngIf="bot.token">
+                <label>Token (Salve agora, não será exibido novamente!)</label>
+                <div class="token-display">
+                    <code class="token-text">
+                        {{ bot.tokenVisible ? bot.token : getMaskedToken(bot.token) }}
+                    </code>
+                    <div class="token-actions">
+                        <button class="token-btn" (click)="toggleToken(bot)"
+                            [title]="bot.tokenVisible ? 'Ocultar' : 'Mostrar'">
+                            <i [class]="bot.tokenVisible ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+                        </button>
+                        <button class="token-btn" (click)="copyToken(bot.token)" title="Copiar">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bot-meta">
+                <span><i class="fa-solid fa-calendar"></i> Criado em {{ bot.created_at | date:'dd/MM/yyyy' }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-state" *ngIf="bots.length === 0 && !showCreateForm">
+        <div class="empty-icon"><i class="fa-solid fa-robot"></i></div>
+        <h3>Nenhum bot criado</h3>
+        <p>Crie seu primeiro bot para integrar com servidores do Sanctuaryum.</p>
+        <button class="btn-new-bot" (click)="showCreateForm = true">
+            <i class="fa-solid fa-plus"></i> Criar Primeiro Bot
+        </button>
+    </div>
+
+    <div class="api-docs-preview">
+        <h3><i class="fa-solid fa-book"></i> Referência Rápida da API</h3>
+        <div class="doc-endpoint">
+            <span class="method post">POST</span>
+            <code>/api/bot/message</code>
+            <span class="desc">Enviar mensagem para um canal</span>
+        </div>
+        <div class="doc-endpoint">
+            <span class="method get">GET</span>
+            <code>/api/bot/server/:id</code>
+            <span class="desc">Informações do servidor</span>
+        </div>
+        <div class="doc-endpoint">
+            <span class="method get">GET</span>
+            <code>/api/bot/channels/:serverId</code>
+            <span class="desc">Listar canais de um servidor</span>
+        </div>
+        <p class="doc-note">Autenticação: <code>Authorization: Bot SANC.BOT.xxxxx</code></p>
+    </div>
+</div>

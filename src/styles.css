@@ -4,6 +4,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     /* Cores Base */
     --bg-dark: #09090b;
@@ -56,3 +60,150 @@ body {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(139, 92, 246, 0.5); background: #7c3aed; }
+
+/* ===========================================================================
+   Premium UI Additions (Sanctuaryum aesthetics)
+   =========================================================================== */
+
+/* Glassmorphism de Altíssimo Nível */
+.premium-glass {
+    background: rgba(20, 20, 25, 0.55);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.premium-glass:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: 0 12px 40px 0 rgba(139, 92, 246, 0.15);
+}
+
+/* Fundo Animado Premium (Efeito Aurora/Mesh) */
+.aurora-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+    overflow: hidden;
+    background: #09090b;
+}
+
+.aurora-sphere {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.2;
+    mix-blend-mode: screen;
+    animation: float-around 25s infinite alternate ease-in-out;
+}
+
+.aurora-sphere-1 {
+    top: -10%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--neon-purple) 0%, transparent 80%);
+    animation-duration: 30s;
+}
+
+.aurora-sphere-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, var(--neon-blue) 0%, transparent 80%);
+    animation-duration: 35s;
+}
+
+.aurora-sphere-3 {
+    top: 30%;
+    right: 20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--neon-pink) 0%, transparent 80%);
+    animation-duration: 20s;
+}
+
+/* Micro-animações e Keyframes */
+@keyframes float-around {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translate(100px, 80px) scale(1.1) rotate(180deg);
+    }
+    100% {
+        transform: translate(-50px, 120px) scale(0.9) rotate(360deg);
+    }
+}
+
+.hover-glow {
+    transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+    text-shadow: 0 0 8px var(--neon-purple);
+    color: #fff !important;
+}
+
+/* Card Glow Moderno */
+.neon-glow-border {
+    position: relative;
+    border-radius: 12px;
+    background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue), var(--neon-pink), var(--neon-purple));
+    background-size: 400%;
+    padding: 1px;
+    z-index: 1;
+    animation: neon-gradient-flow 8s linear infinite;
+}
+
+@keyframes neon-gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.neon-glow-inner {
+    background: #131316;
+    border-radius: 11px;
+    height: 100%;
+    width: 100%;
+}
+
+/* Efeito Premium de Shimmer (Brilho que varre) */
+.shimmer-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 30%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.shimmer-btn:hover::after {
+    animation: shimmer-effect 1.5s infinite;
+    opacity: 1;
+}
+
+@keyframes shimmer-effect {
+    0% { transform: translate(-30%, -30%) rotate(30deg); }
+    100% { transform: translate(30%, 30%) rotate(30deg); }
+}

@@ -45,7 +45,7 @@
                      [ngClass]="currentMode === 'social' ? 'card-social' : 'card-gamer'">
                     
                     <ng-container *ngIf="currentMode === 'social'">
-                        <div class="banner" [style.backgroundImage]="'url(' + (item.img || '') + ')'"></div>
+                        <div class="banner" [style.background]="item.gradient || 'linear-gradient(135deg, #1e1b4b, #312e81)'"></div>
                         <div class="content">
                             <div class="title">{{ item.title }}</div>
                             <div class="meta">
@@ -55,13 +55,20 @@
                     </ng-container>
 
                     <ng-container *ngIf="currentMode === 'community'">
-                        <div class="banner" [style.backgroundImage]="'url(' + (item.banner || '') + ')'"></div>
+                        <div class="banner" [style.background]="item.is_promoted ? 'linear-gradient(135deg, #78350f, #f59e0b)' : 'linear-gradient(135deg, #1a1a2e, #16213e)'"></div>
                         <div class="content">
-                            <div class="icon" [style.backgroundImage]="'url(' + (item.icon || '') + ')'"></div>
-                            <div class="title">{{ item.name }}</div>
-                            <div class="meta">{{ item.members }} membros</div>
+                            <div class="icon relative overflow-hidden flex items-center justify-center text-sm font-bold text-white" 
+                                 [style.background]="item.is_promoted ? '#f59e0b' : '#6366f1'">
+                                <img *ngIf="item.icon_url" [src]="item.icon_url" class="absolute inset-0 w-full h-full object-cover" />
+                                <span *ngIf="!item.icon_url">{{ item.name.charAt(0).toUpperCase() }}</span>
+                            </div>
+                            <div class="title flex items-center gap-1.5 flex-wrap">
+                                <span *ngIf="item.is_promoted" class="bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wide animate-pulse">Promovido</span>
+                                {{ item.name }}
+                            </div>
+                            <div class="meta text-xs text-white/40"><i class="fa-solid fa-users text-neon-blue mr-1"></i>{{ item.members_count || 0 }} habitantes</div>
                             <div class="tags-row">
-                                <span *ngFor="let t of item.tags" class="card-tag">#{{ t }}</span>
+                                <span *ngFor="let t of item.tags" class="card-tag" [class.promoted-tag]="item.is_promoted">#{{ t }}</span>
                             </div>
                         </div>
                     </ng-container>

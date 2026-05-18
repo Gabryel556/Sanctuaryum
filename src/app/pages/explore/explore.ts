@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-explore',
@@ -10,49 +12,36 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './explore.css'
 })
 export class ExploreComponent implements OnInit {
-  // 1. Estado da Página
   currentMode: 'social' | 'community' = 'social';
   searchTerm: string = '';
   activeTag: string = 'Todos';
 
-  // 2. Dados Dinâmicos do Hero (Título e Subtítulo)
   hero = {
     prefix: 'Seu mundo, ',
     gradient: 'criado por você.',
     subtitle: 'Fotos, momentos e música em harmonia.',
     featTitle: 'Em Alta',
-    feedTitle: 'Para Você'
+    feedTitle: 'Feed'
   };
 
-  // 3. Tags
   tags: string[] = [];
-  
-  // 4. Dados (Simulando o que viria da API)
-  socialData = [
-    { title: 'Cyberpunk City Night', author: { username: 'NeoDev' }, likes: 120, img: 'https://via.placeholder.com/300x150/1e1b4b/fff', tags: ['Arte', 'Tech'] },
-    { title: 'Setup Minimalista', author: { username: 'DesignMaster' }, likes: 85, img: 'https://via.placeholder.com/300x150/333/fff', tags: ['Tech', 'Lifestyle'] },
-    { title: 'Abstract Flow', author: { username: 'ArtBot' }, likes: 45, img: 'https://via.placeholder.com/300x150/555/fff', tags: ['Arte'] }
-  ];
-
-  serverData = [
-    { name: 'Dev House BR', members: 4500, icon: 'https://via.placeholder.com/50/222/fff', banner: 'https://via.placeholder.com/300x100/111/fff', tags: ['Dev', 'Tech'] },
-    { name: 'RPG Tavern', members: 1200, icon: 'https://via.placeholder.com/50/444/fff', banner: 'https://via.placeholder.com/300x100/222/fff', tags: ['RPG', 'Jogos'] }
-  ];
-
-  // Dados que estão sendo mostrados na tela agora
+  socialData: any[] = [];
+  serverData: any[] = [];
   displayData: any[] = [];
 
-  constructor() {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.setMode('social');
   }
 
-  // Lógica de Troca de Modo
   setMode(mode: 'social' | 'community') {
     this.currentMode = mode;
-    this.activeTag = 'Todos'; // Reseta filtro
-    this.searchTerm = ''; // Reseta busca
+    this.activeTag = 'Todos';
+    this.searchTerm = '';
 
     if (mode === 'social') {
       this.hero = {
@@ -63,7 +52,7 @@ export class ExploreComponent implements OnInit {
         feedTitle: 'Feed'
       };
       this.tags = ['Todos', 'Fotografia', 'Música', 'Arte', 'Tech', 'Lifestyle'];
-      this.displayData = this.socialData;
+      this.loadSocialData();
     } else {
       this.hero = {
         prefix: 'Encontre sua ',
@@ -73,22 +62,61 @@ export class ExploreComponent implements OnInit {
         feedTitle: 'Explorar Servidores'
       };
       this.tags = ['Todos', 'Jogos', 'Dev', 'RPG', 'Anime', 'Hardware'];
-      this.displayData = this.serverData;
+      this.loadServerData();
     }
   }
 
-  // Lógica de Filtro por Tag
+  loadSocialData() {
+    this.http.get<any[]>('http://localhost:3000/api/posts/feed', {
+      headers: this.authService.getAuthHeaders()
+    }).subscribe({
+      next: (posts) => {
+        this.socialData = posts.map(p => ({
+          id: p.id,
+          title: p.content,
+          likes: p.likes_count,
+          author: { username: p.author_username },
+          tags: ['Geral']
+        }));
+        this.applyFilters();
+      },
+      error: (err) => {
+        console.error('Erro ao carregar posts para exploração:', err);
+      }
+    });
+  }
+
+  loadServerData() {
+    this.http.get<any[]>('http://localhost:3000/api/servers/explore', {
+      headers: this.authService.getAuthHeaders()
+    }).subscribe({
+      next: (servers) => {
+        this.serverData = servers.map(s => ({
+          id: s.id,
+          name: s.name,
+          description: s.description,
+          icon_url: s.icon_url,
+          members_count: s.members_count,
+          is_promoted: s.is_promoted,
+          tags: s.is_promoted ? ['Destaque'] : ['Comunidade']
+        }));
+        this.applyFilters();
+      },
+      error: (err) => {
+        console.error('Erro ao carregar servidores para exploração:', err);
+      }
+    });
+  }
+
   filterByTag(tag: string) {
     this.activeTag = tag;
     this.applyFilters();
   }
 
-  // Lógica de Busca
   onSearch() {
     this.applyFilters();
   }
 
-  // Aplica Busca + Tag
   applyFilters() {
     const source = this.currentMode === 'social' ? this.socialData : this.serverData;
     const term = this.searchTerm.toLowerCase();

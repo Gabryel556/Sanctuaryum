@@ -1,31 +1,174 @@
-<div class="profile-layout">
-    <aside class="profile-sidebar">
-        <div class="profile-card">
-            <div class="avatar-container">
-                <img src="assets/avatar-placeholder.png" alt="Avatar" class="avatar-img">
+<div class="profile-page">
+    <div class="profile-banner" [style.background]="'linear-gradient(135deg, ' + themeColor + '33, ' + themeColor + '11)'">
+        <div class="banner-overlay"></div>
+        <button class="banner-edit-btn"><i class="fa-solid fa-camera"></i></button>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-header">
+            <div class="avatar-section">
+                <div class="avatar-ring" [style.border-color]="themeColor">
+                    <div class="avatar-circle" [style.background]="themeColor">
+                        <span class="avatar-initial">{{ getInitial() }}</span>
+                    </div>
+                </div>
+                <button class="avatar-edit"><i class="fa-solid fa-camera"></i></button>
             </div>
-            <div class="profile-actions">
-                <button class="btn-primary">Seguir</button>
-                <button class="btn-icon"><i class="fa-solid fa-envelope"></i></button>
+
+            <div class="header-info">
+                <div class="name-row">
+                    <h1 class="display-name">{{ displayName }}</h1>
+                    <span class="verified-badge" *ngIf="isVerifiedArtist">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </span>
+                </div>
+                <span class="handle">&#64;{{ username }}</span>
+                <div class="badges-row">
+                    <span class="badge" *ngFor="let badge of badges" [style.border-color]="themeColor + '44'"
+                        [style.color]="themeColor">
+                        {{ badge }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="btn-edit-profile" [style.border-color]="themeColor + '44'"
+                    [style.color]="themeColor">
+                    <i class="fa-solid fa-pen"></i> Editar Perfil
+                </button>
             </div>
         </div>
-    </aside>
 
-    <main class="profile-main">
-        <nav class="profile-tabs">
-            <button class="tab" [class.active]="activeTab === 'posts'" (click)="activeTab = 'posts'">Posts</button>
-            <button class="tab" [class.active]="activeTab === 'midia'" (click)="activeTab = 'midia'">Mídia</button>
-            <button class="tab" [class.active]="activeTab === 'servidores'"
-                (click)="activeTab = 'servidores'">Servidores</button>
-        </nav>
-        <hr class="tab-divider">
+        <div class="profile-body">
+            <aside class="profile-sidebar">
+                <div class="info-card">
+                    <div class="info-section">
+                        <h4>Sobre</h4>
+                        <div *ngIf="!isEditingBio">
+                            <p class="bio-text">{{ bio }}</p>
+                            <button class="bio-edit-btn" (click)="isEditingBio = true">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </div>
+                        <div *ngIf="isEditingBio" class="bio-edit-area">
+                            <textarea [(ngModel)]="bio" rows="3" class="bio-input"></textarea>
+                            <button class="bio-save" (click)="saveBio()">Salvar</button>
+                        </div>
+                    </div>
 
-        <div class="feed-content">
-            <div class="loading-state">
-                <i class="fa-solid fa-circle-notch fa-spin loader-icon"></i>
-                <p>Carregando dados...</p>
-                <p class="error-msg">Não foi possível carregar os posts.</p>
-            </div>
+                    <div class="info-section">
+                        <h4>Informações</h4>
+                        <div class="info-item">
+                            <i class="fa-solid fa-calendar"></i>
+                            <span>Membro desde {{ joinDate }}</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>{{ email }}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h4>Cor do Perfil</h4>
+                        <div class="color-picker">
+                            <button class="color-dot" *ngFor="let c of colorOptions"
+                                [style.background]="c"
+                                [class.active]="c === themeColor"
+                                (click)="setThemeColor(c)">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ posts.length }}</span>
+                        <span class="stat-label">Posts</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Seguidores</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Seguindo</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="profile-main">
+                <nav class="profile-tabs">
+                    <button class="tab" [class.active]="activeTab === 'posts'"
+                        [style.--tab-color]="themeColor" (click)="activeTab = 'posts'">
+                        <i class="fa-solid fa-pen-to-square"></i> Posts
+                    </button>
+                    <button class="tab" [class.active]="activeTab === 'midia'"
+                        [style.--tab-color]="themeColor" (click)="activeTab = 'midia'">
+                        <i class="fa-solid fa-image"></i> Mídia
+                    </button>
+                    <button class="tab" [class.active]="activeTab === 'servidores'"
+                        [style.--tab-color]="themeColor" (click)="activeTab = 'servidores'">
+                        <i class="fa-solid fa-server"></i> Servidores
+                    </button>
+                    <button class="tab" [class.active]="activeTab === 'playlists'"
+                        [style.--tab-color]="themeColor" (click)="activeTab = 'playlists'">
+                        <i class="fa-solid fa-music"></i> Playlists
+                    </button>
+                </nav>
+
+                <div class="tab-content-area">
+                    <div class="loading-state" *ngIf="!postsLoaded">
+                        <i class="fa-solid fa-circle-notch fa-spin" [style.color]="themeColor"></i>
+                        <p>Carregando...</p>
+                    </div>
+
+                    <div *ngIf="postsLoaded && activeTab === 'posts'">
+                        <div class="profile-post" *ngFor="let post of posts">
+                            <div class="pp-avatar" [style.background]="themeColor">
+                                {{ getInitial() }}
+                            </div>
+                            <div class="pp-content">
+                                <div class="pp-header">
+                                    <span class="pp-author">{{ username }}</span>
+                                    <span class="pp-time">{{ post.time }}</span>
+                                </div>
+                                <p class="pp-text">{{ post.content }}</p>
+                                <div class="pp-actions">
+                                    <button class="pp-action">
+                                        <i class="fa-regular fa-heart"></i> {{ post.likes }}
+                                    </button>
+                                    <button class="pp-action">
+                                        <i class="fa-regular fa-comment"></i> {{ post.comments }}
+                                    </button>
+                                    <button class="pp-action">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="empty-tab" *ngIf="posts.length === 0">
+                            <i class="fa-solid fa-feather-pointed"></i>
+                            <p>Nenhum post ainda</p>
+                        </div>
+                    </div>
+
+                    <div class="empty-tab" *ngIf="postsLoaded && activeTab === 'midia'">
+                        <i class="fa-solid fa-image"></i>
+                        <p>Nenhuma mídia compartilhada</p>
+                    </div>
+
+                    <div class="empty-tab" *ngIf="postsLoaded && activeTab === 'servidores'">
+                        <i class="fa-solid fa-server"></i>
+                        <p>Nenhum servidor ainda</p>
+                    </div>
+
+                    <div class="empty-tab" *ngIf="postsLoaded && activeTab === 'playlists'">
+                        <i class="fa-solid fa-music"></i>
+                        <p>Nenhuma playlist criada</p>
+                    </div>
+                </div>
+            </main>
         </div>
-    </main>
+    </div>
 </div>

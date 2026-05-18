@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CryptoService } from '../../services/crypto.service';
 import { DecryptPipe } from '../../pipes/decrypt.pipe';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-chat',
@@ -12,47 +13,54 @@ import { DecryptPipe } from '../../pipes/decrypt.pipe';
   styleUrl: './chat.css'
 })
 export class ChatComponent implements OnInit {
-  
-  // 1. Dados
-  currentUser = { username: 'Visitante', tag: '#0000', avatar: 'assets/images/avatar.jpg' };
-  serverName = 'Sanctuaryum Oficial';
-  currentChannelName = 'geral';
-  
+
+  currentUser = { username: 'Visitante', tag: '#0000', avatar: '' };
+  serverName = 'Sanctuaryum Nexus';
+  currentChannelName = 'Frequência Geral';
+
   channels = [
-    { id: 1, name: 'geral', type: 'text', active: true },
-    { id: 2, name: 'desenvolvimento', type: 'text', active: false },
-    { id: 3, name: 'memes', type: 'text', active: false }
+    { id: 1, name: 'Geral', type: 'text', active: true },
+    { id: 2, name: 'Avisos', type: 'text', active: false },
+    { id: 3, name: 'Lounge (Voz)', type: 'voice', active: false }
   ];
 
   messages: any[] = [];
-  members = [
-    { username: 'NeoDev', status: 'online', color: '#fff', avatar: '', role: 'Admin' },
-    { username: 'Admin', status: 'dnd', color: '#ef4444', avatar: '', role: 'Mod' }
-  ];
+  members: any[] = [];
 
   newMessage = '';
   selectedMember: any = null;
-  
-  // Player
+
   isPlayerCollapsed = false;
   isPlaying = false;
   currentTrack = { title: 'Neon Blade', artist: 'MoonDeity', cover: '' };
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private crypto: CryptoService
-  ) {}
+    private crypto: CryptoService,
+    private authService: AuthService
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadUser();
-    // Mensagem de boas vindas cifrada
-    const welcome = this.crypto.encrypt("Bem-vindo ao Sanctuaryum (Secure Channel).");
-    this.messages.push({ username: 'Sistema', text: welcome, time: '10:00', avatar: '' });
+    
+    // Segurança com chaves no chat: Gera par ECDH e deriva segredo Quimera V3 local
+    try {
+      const myJwk = await this.crypto.generateMyKeys();
+      await this.crypto.computeSharedSecret(myJwk);
+    } catch (e) {
+      console.error("Erro na inicialização da criptografia de chaves:", e);
+    }
   }
 
   loadUser() {
-    const userStr = localStorage.getItem('sanc_user');
-    if (userStr) this.currentUser = JSON.parse(userStr);
+    const user = this.authService.getCurrentUserValue();
+    if (user) {
+      this.currentUser = {
+        username: user.username,
+        tag: '#' + user.id.substring(0, 4),
+        avatar: ''
+      };
+    }
   }
 
   switchChannel(channel: any) {
@@ -62,8 +70,6 @@ export class ChatComponent implements OnInit {
     this.messages = [];
     
     setTimeout(() => {
-        const msg = this.crypto.encrypt(`Você entrou em #${channel.name}`);
-        this.messages.push({ username: 'Sistema', text: msg, time: 'Agora', avatar: '' });
         this.cdr.detectChanges();
     }, 100);
   }

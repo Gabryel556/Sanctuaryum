@@ -1,0 +1,7 @@
+.main-content {
+  padding-top: 60px;
+}
+
+.main-content.no-nav {
+  padding-top: 0;
+}

@@ -60,7 +60,8 @@
               "buildTarget": "sanctuaryum:build:production"
             },
             "development": {
-              "buildTarget": "sanctuaryum:build:development"
+              "buildTarget": "sanctuaryum:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

@@ -1,11 +1,12 @@
 <nav class="glass-nav">
-    <div class="brand-logo" style="font-size: 1.5rem;">SANCTUARYUM</div>
-    
+    <div class="brand-logo">
+        <span class="brand-text">SANCTUARYUM</span>
+    </div>
+
     <div class="nav-links">
-        <button class="nav-btn-create" (click)="openModal()">
-            <i class="fa-solid fa-plus"></i> <span class="nav-text">Criar</span>
-        </button>
-        
+        <a routerLink="/feed" routerLinkActive="active" class="nav-item">
+            <i class="fa-solid fa-house"></i> <span class="nav-text">Feed</span>
+        </a>
         <a routerLink="/explore" routerLinkActive="active" class="nav-item">
             <i class="fa-solid fa-compass"></i> <span class="nav-text">Explorar</span>
         </a>
@@ -15,11 +16,20 @@
         <a routerLink="/waves" routerLinkActive="active" class="nav-item">
             <i class="fa-solid fa-music"></i> <span class="nav-text">Waves</span>
         </a>
-        <a routerLink="/profile" routerLinkActive="active" class="nav-item">
-            <i class="fa-solid fa-user"></i> <span class="nav-text">Perfil</span>
+        <a routerLink="/loja" routerLinkActive="active" class="nav-item">
+            <i class="fa-solid fa-store"></i> <span class="nav-text">Loja</span>
         </a>
-        <a routerLink="/settings" routerLinkActive="active" class="nav-item">
-            <i class="fa-solid fa-gear"></i> <span class="nav-text">Config</span>
+    </div>
+
+    <div class="nav-actions">
+        <button class="nav-btn-create" (click)="openModal()">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+        <a routerLink="/profile" routerLinkActive="active" class="nav-avatar-btn">
+            <i class="fa-solid fa-user"></i>
+        </a>
+        <a routerLink="/settings" routerLinkActive="active" class="nav-icon-btn">
+            <i class="fa-solid fa-gear"></i>
         </a>
     </div>
 </nav>
@@ -27,24 +37,37 @@
 <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
     <div class="modal-box" (click)="$event.stopPropagation()">
         <button class="modal-close" (click)="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-        
+
         <div class="modal-header">
             <h2>Criar Novo</h2>
             <div class="modal-tabs">
-                <button class="m-tab" [class.active]="activeTab === 'post'" (click)="switchTab('post')">Post Social</button>
-                <button class="m-tab" [class.active]="activeTab === 'server'" (click)="switchTab('server')">Servidor</button>
+                <button class="m-tab" [class.active]="activeTab === 'post'" (click)="switchTab('post')">
+                    <i class="fa-solid fa-pen-to-square"></i> Post
+                </button>
+                <button class="m-tab" [class.active]="activeTab === 'server'" (click)="switchTab('server')">
+                    <i class="fa-solid fa-server"></i> Servidor
+                </button>
             </div>
         </div>
-        
+
         <div class="modal-content">
-            <div class="upload-area">
-                <i class="fa-solid fa-cloud-arrow-up"></i><br>
-                <span *ngIf="activeTab === 'post'">Arraste sua foto ou clique para upload</span>
-                <span *ngIf="activeTab === 'server'">Escolha o ícone do servidor</span>
+            <div *ngIf="activeTab === 'post'">
+                <textarea class="modal-textarea" placeholder="O que está acontecendo?" rows="4"></textarea>
+                <div class="upload-area compact">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Adicionar imagem (opcional)</span>
+                </div>
             </div>
-            
-            <input *ngIf="activeTab === 'server'" type="text" placeholder="Nome do Servidor" class="modal-input">
-            
+
+            <div *ngIf="activeTab === 'server'">
+                <div class="upload-area">
+                    <i class="fa-solid fa-cloud-arrow-up"></i><br>
+                    <span>Escolha o ícone do servidor</span>
+                </div>
+                <input type="text" placeholder="Nome do Servidor" class="modal-input">
+                <textarea class="modal-textarea small" placeholder="Descrição (opcional)" rows="2"></textarea>
+            </div>
+
             <button class="btn-primary" style="width: 100%; margin-top: 20px;">
                 {{ activeTab === 'post' ? 'Publicar' : 'Criar Servidor' }}
             </button>

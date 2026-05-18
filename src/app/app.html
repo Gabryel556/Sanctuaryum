@@ -1,5 +1,12 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="authService.isAuthenticated()"></app-navbar>
 
-<main class="main-content">
+<!-- Fundo Aurora Premium de Altíssimo Nível -->
+<div class="aurora-bg">
+  <div class="aurora-sphere aurora-sphere-1"></div>
+  <div class="aurora-sphere aurora-sphere-2"></div>
+  <div class="aurora-sphere aurora-sphere-3"></div>
+</div>
+
+<main class="w-full min-h-screen text-white bg-transparent relative z-10" [ngClass]="{'pt-20': authService.isAuthenticated()}">
   <router-outlet></router-outlet>
 </main>

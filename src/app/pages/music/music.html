@@ -6,23 +6,204 @@
         <button class="waves-tab" [class.active]="activeTab === 'colecao'" (click)="activeTab = 'colecao'">
             <i class="fa-solid fa-layer-group"></i> Sua Coleção
         </button>
-        <button class="waves-tab artist-btn">
+        <button class="waves-tab artist-btn" [class.active]="activeTab === 'artista'"
+            (click)="activeTab = 'artista'">
             <i class="fa-solid fa-star"></i> Seja um Artista
         </button>
     </nav>
 
-    <div class="waves-hero">
-        <span class="hero-tag">DESTAQUE DA COMUNIDADE</span>
-        <h1 class="hero-title">Sanctuary Waves</h1>
-        <p class="hero-subtitle">Descubra novas frequências.</p>
-        <button class="btn-play-radio"><i class="fa-solid fa-play"></i> Ouvir Rádio</button>
+    <!-- TAB INÍCIO -->
+    <div class="tab-content" *ngIf="activeTab === 'inicio'">
+        <div class="waves-hero">
+            <div class="hero-tag-row">
+                <span class="hero-tag">DESTAQUE DA COMUNIDADE</span>
+            </div>
+            <h1 class="hero-title">Sanctuary Waves</h1>
+            <p class="hero-subtitle">Descubra novas frequências. Compartilhe sua arte.</p>
+            <button class="btn-play-radio" (click)="playTrack(0)">
+                <i class="fa-solid fa-play"></i> Ouvir Rádio
+            </button>
+        </div>
+
+        <div class="waves-section">
+            <div class="section-header">
+                <span class="vertical-bar"></span>
+                <h2>Tendências</h2>
+            </div>
+            <div class="tracks-list">
+                <div class="track-item" *ngFor="let track of tracks; let i = index"
+                    [class.playing]="currentTrackIndex === i" (click)="playTrack(i)">
+                    <div class="track-number">{{ i + 1 }}</div>
+                    <div class="track-cover" [style.background]="track.gradient">
+                        <i class="fa-solid fa-play track-play-icon"></i>
+                    </div>
+                    <div class="track-info">
+                        <span class="track-title">{{ track.title }}</span>
+                        <span class="track-artist">{{ track.artist }}</span>
+                    </div>
+                    <div class="track-plays">
+                        <i class="fa-solid fa-headphones"></i> {{ track.plays }}
+                    </div>
+                    <div class="track-duration">{{ track.duration }}</div>
+                    <button class="track-action" [class.liked]="track.liked"
+                        (click)="toggleLike(track); $event.stopPropagation()">
+                        <i [class]="track.liked ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="waves-section">
+            <div class="section-header">
+                <span class="vertical-bar pink"></span>
+                <h2>Playlists da Comunidade</h2>
+            </div>
+            <div class="playlist-grid">
+                <div class="playlist-card" *ngFor="let pl of communityPlaylists">
+                    <div class="playlist-cover" [style.background]="pl.gradient">
+                        <i class="fa-solid fa-play playlist-play"></i>
+                    </div>
+                    <div class="playlist-info">
+                        <span class="playlist-name">{{ pl.name }}</span>
+                        <span class="playlist-meta">{{ pl.author }} · {{ pl.tracks }} faixas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="waves-section">
-        <div class="section-header">
-            <span class="vertical-bar"></span>
-            <h2>Tendências</h2>
+    <!-- TAB SUA COLEÇÃO -->
+    <div class="tab-content" *ngIf="activeTab === 'colecao'">
+        <div class="waves-section">
+            <div class="section-header">
+                <span class="vertical-bar"></span>
+                <h2>Suas Playlists</h2>
+            </div>
+            <div class="your-playlists">
+                <div class="your-playlist-item" *ngFor="let pl of playlists">
+                    <div class="yp-icon" [style.background]="pl.gradient">
+                        <i class="fa-solid" [ngClass]="pl.icon"></i>
+                    </div>
+                    <div class="yp-info">
+                        <span class="yp-name">{{ pl.name }}</span>
+                        <span class="yp-count">{{ pl.count }} faixas</span>
+                    </div>
+                    <button class="yp-play"><i class="fa-solid fa-play"></i></button>
+                </div>
+            </div>
+            <button class="btn-new-playlist">
+                <i class="fa-solid fa-plus"></i> Nova Playlist
+            </button>
         </div>
-        <p class="empty-state-text">Nenhuma faixa encontrada no momento.</p>
+
+        <div class="waves-section">
+            <div class="section-header">
+                <span class="vertical-bar pink"></span>
+                <h2>Faixas Curtidas</h2>
+            </div>
+            <div class="tracks-list" *ngIf="getLikedTracks().length > 0">
+                <div class="track-item" *ngFor="let track of getLikedTracks(); let i = index">
+                    <div class="track-number">{{ i + 1 }}</div>
+                    <div class="track-cover" [style.background]="track.gradient">
+                        <i class="fa-solid fa-play track-play-icon"></i>
+                    </div>
+                    <div class="track-info">
+                        <span class="track-title">{{ track.title }}</span>
+                        <span class="track-artist">{{ track.artist }}</span>
+                    </div>
+                    <div class="track-duration">{{ track.duration }}</div>
+                    <button class="track-action liked" (click)="toggleLike(track)">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="empty-collection" *ngIf="getLikedTracks().length === 0">
+                <i class="fa-regular fa-heart"></i>
+                <p>Nenhuma faixa curtida ainda</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB SEJA UM ARTISTA -->
+    <div class="tab-content" *ngIf="activeTab === 'artista'">
+        <div class="artist-section" *ngIf="artistStatus === 'none'">
+            <div class="artist-hero">
+                <div class="artist-icon">
+                    <i class="fa-solid fa-microphone-lines"></i>
+                </div>
+                <h2>Torne-se um Artista Verificado</h2>
+                <p>Compartilhe suas faixas com a comunidade Sanctuaryum. Artistas verificados podem
+                    fazer upload de músicas, criar álbuns e receber apoio dos ouvintes.</p>
+            </div>
+
+            <div class="artist-benefits">
+                <div class="benefit-card">
+                    <i class="fa-solid fa-upload"></i>
+                    <h4>Upload de Faixas</h4>
+                    <p>Publique suas músicas diretamente na plataforma</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h4>Análises</h4>
+                    <p>Acompanhe plays, curtidas e crescimento</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-certificate"></i>
+                    <h4>Badge Verificado</h4>
+                    <p>Receba o selo de artista verificado no seu perfil</p>
+                </div>
+            </div>
+
+            <form class="artist-form" (ngSubmit)="submitArtistApplication()">
+                <div class="form-group">
+                    <label>Nome Artístico</label>
+                    <input type="text" [(ngModel)]="artistForm.artistName" name="artistName"
+                        placeholder="Como você quer ser conhecido" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Gênero Musical</label>
+                    <input type="text" [(ngModel)]="artistForm.genre" name="genre"
+                        placeholder="Synthwave, Lo-Fi, Indie..." class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Sobre Você</label>
+                    <textarea [(ngModel)]="artistForm.bio" name="bio" rows="4"
+                        placeholder="Conte sobre sua jornada musical e o que te inspira..."
+                        class="form-input form-textarea"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Links Sociais</label>
+                    <input type="text" [(ngModel)]="artistForm.socialLinks" name="socialLinks"
+                        placeholder="SoundCloud, YouTube, Bandcamp..." class="form-input">
+                </div>
+                <button type="submit" class="btn-apply"
+                    [disabled]="!artistForm.artistName || !artistForm.bio">
+                    <i class="fa-solid fa-paper-plane"></i> Enviar para Verificação
+                </button>
+            </form>
+        </div>
+
+        <div class="artist-status-section" *ngIf="artistStatus === 'pending'">
+            <div class="status-card pending">
+                <div class="status-icon"><i class="fa-solid fa-clock"></i></div>
+                <h2>Verificação em Análise</h2>
+                <p>Seu pedido foi recebido e está sendo analisado pela equipe do Sanctuaryum.
+                    Você será notificado quando houver uma atualização.</p>
+                <div class="status-badge pending-badge">
+                    <i class="fa-solid fa-hourglass-half"></i> Pendente
+                </div>
+            </div>
+        </div>
+
+        <div class="artist-status-section" *ngIf="artistStatus === 'approved'">
+            <div class="status-card approved">
+                <div class="status-icon success"><i class="fa-solid fa-circle-check"></i></div>
+                <h2>Você é um Artista Verificado! 🎉</h2>
+                <p>Parabéns! Agora você pode fazer upload de faixas e criar álbuns.</p>
+                <button class="btn-upload">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload de Faixa
+                </button>
+            </div>
+        </div>
     </div>
 </div>
