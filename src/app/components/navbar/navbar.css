@@ -106,7 +106,8 @@
     font-size: 0.8rem;
 }
 
-.nav-avatar-btn:hover, .nav-avatar-btn.active {
+.nav-avatar-btn:hover,
+.nav-avatar-btn.active {
     background: rgba(139, 92, 246, 0.12);
     color: #a78bfa;
     border-color: rgba(139, 92, 246, 0.2);
@@ -126,15 +127,18 @@
     font-size: 0.8rem;
 }
 
-.nav-icon-btn:hover, .nav-icon-btn.active {
+.nav-icon-btn:hover,
+.nav-icon-btn.active {
     color: rgba(255, 255, 255, 0.6);
     background: rgba(255, 255, 255, 0.04);
 }
 
-/* ===== MODAL ===== */
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
     z-index: 2000;
@@ -157,11 +161,13 @@
 
 .modal-close {
     position: absolute;
-    top: 1rem; right: 1rem;
+    top: 1rem;
+    right: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border: none;
     color: rgba(255, 255, 255, 0.4);
-    width: 32px; height: 32px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -287,10 +293,28 @@
     border-color: rgba(139, 92, 246, 0.3);
 }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes scaleIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
 
-/* Responsive */
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 @media (max-width: 768px) {
     .glass-nav {
         padding: 0 1rem;

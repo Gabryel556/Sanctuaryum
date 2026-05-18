@@ -1,30 +1,39 @@
-<div class="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-[#09090b] text-white font-sans">
-  <!-- Dynamic Background Glows -->
+<div
+  class="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-[#09090b] text-white font-sans">
   <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-neon-purple/20 blur-[150px] rounded-full animate-pulse"></div>
-    <div class="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-neon-blue/20 blur-[150px] rounded-full animate-pulse" style="animation-delay: 2s;"></div>
-    <!-- Subtle Grid Overlay -->
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    <div
+      class="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-neon-purple/20 blur-[150px] rounded-full animate-pulse">
+    </div>
+    <div
+      class="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-neon-blue/20 blur-[150px] rounded-full animate-pulse"
+      style="animation-delay: 2s;"></div>
+    <div class="absolute inset-0 opacity-[0.03]"
+      style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;">
+    </div>
   </div>
 
   <div class="z-10 flex flex-col lg:flex-row w-full max-w-7xl p-6 gap-12 lg:gap-24 relative items-center">
-    <!-- Hero / Information Side -->
     <div class="flex-1 flex flex-col justify-center gap-6 lg:gap-8 text-center lg:text-left">
-      <div class="text-neon-purple tracking-[0.2em] font-bold text-sm uppercase flex items-center gap-3 justify-center lg:justify-start">
+      <div
+        class="text-neon-purple tracking-[0.2em] font-bold text-sm uppercase flex items-center gap-3 justify-center lg:justify-start">
         <div class="w-8 h-[2px] bg-neon-purple"></div>
         SANCTUARYUM
       </div>
-      
+
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
         O refúgio seguro<br>
-        para <span class="bg-clip-text text-transparent bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue animate-gradient-x">sua vida digital.</span>
+        para <span
+          class="bg-clip-text text-transparent bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue animate-gradient-x">sua
+          vida digital.</span>
       </h1>
-      
+
       <p class="text-gray-400 text-lg md:text-xl max-w-lg mx-auto lg:mx-0 font-light">
-        Junte-se a milhares de criadores e gamers em uma rede de próxima geração, focada em privacidade, segurança e liberdade absoluta.
+        Junte-se a milhares de criadores e gamers em uma rede de próxima geração, focada em privacidade, segurança e
+        liberdade absoluta.
       </p>
-      
-      <div class="inline-flex items-center gap-3 bg-white/[0.03] border border-white/10 rounded-full px-5 py-3 w-max backdrop-blur-md mx-auto lg:mx-0 shadow-lg transition-transform hover:scale-105 cursor-default">
+
+      <div
+        class="inline-flex items-center gap-3 bg-white/[0.03] border border-white/10 rounded-full px-5 py-3 w-max backdrop-blur-md mx-auto lg:mx-0 shadow-lg transition-transform hover:scale-105 cursor-default">
         <div class="w-8 h-8 rounded-full bg-neon-blue/20 flex items-center justify-center">
           <i class="fa-solid fa-shield-halved text-neon-blue text-sm"></i>
         </div>
@@ -32,13 +41,13 @@
       </div>
     </div>
 
-    <!-- Form Side -->
     <div class="w-full max-w-md perspective-1000">
-      <div class="bg-white/[0.04] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] relative overflow-hidden group">
-        <!-- Subtle shine effect on hover -->
-        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/[0.05] to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-in-out pointer-events-none"></div>
+      <div
+        class="bg-white/[0.04] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] relative overflow-hidden group">
+        <div
+          class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/[0.05] to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-in-out pointer-events-none">
+        </div>
 
-        <!-- Header -->
         <div class="mb-8 transition-all" *ngIf="isLoginMode">
           <h2 class="text-3xl font-bold mb-2 tracking-tight text-white">Bem-vindo de volta</h2>
           <p class="text-gray-400 text-sm">Insira suas credenciais para acessar o Sanctuaryum.</p>
@@ -48,57 +57,66 @@
           <p class="text-gray-400 text-sm">Sua jornada criptografada começa aqui.</p>
         </div>
 
-        <!-- Alerts -->
-        <div class="flex items-center gap-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl p-4 mb-6 text-sm" *ngIf="errorMessage">
+        <div
+          class="flex items-center gap-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl p-4 mb-6 text-sm"
+          *ngIf="errorMessage">
           <i class="fa-solid fa-circle-exclamation shrink-0"></i>
           <span>{{ errorMessage }}</span>
         </div>
-        <div class="flex items-center gap-3 bg-green-500/10 border border-green-500/20 text-green-400 rounded-xl p-4 mb-6 text-sm" *ngIf="successMessage">
+        <div
+          class="flex items-center gap-3 bg-green-500/10 border border-green-500/20 text-green-400 rounded-xl p-4 mb-6 text-sm"
+          *ngIf="successMessage">
           <i class="fa-solid fa-circle-check shrink-0"></i>
           <span>{{ successMessage }}</span>
         </div>
 
-        <!-- Form: Login -->
         <form class="flex flex-col gap-5" *ngIf="isLoginMode && !is2faMode" (ngSubmit)="onLogin()">
-          <div class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-purple focus-within:bg-white/10 transition-colors">
+          <div
+            class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-purple focus-within:bg-white/10 transition-colors">
             <div class="absolute left-4 text-gray-500"><i class="fa-solid fa-envelope"></i></div>
             <input id="login-email" type="email" placeholder="Email"
               class="w-full bg-transparent text-white placeholder-gray-500 py-4 pl-12 pr-4 outline-none rounded-xl"
               [(ngModel)]="loginEmail" name="loginEmail" autocomplete="email" />
           </div>
 
-          <div class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-purple focus-within:bg-white/10 transition-colors">
+          <div
+            class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-purple focus-within:bg-white/10 transition-colors">
             <div class="absolute left-4 text-gray-500"><i class="fa-solid fa-lock"></i></div>
-            <input id="login-password" [type]="showLoginPassword ? 'text' : 'password'"
-              placeholder="Senha" 
+            <input id="login-password" [type]="showLoginPassword ? 'text' : 'password'" placeholder="Senha"
               class="w-full bg-transparent text-white placeholder-gray-500 py-4 pl-12 pr-12 outline-none rounded-xl"
               [(ngModel)]="loginPassword" name="loginPassword" autocomplete="current-password" />
-            <button type="button" class="absolute right-4 text-gray-500 hover:text-white transition-colors" (click)="showLoginPassword = !showLoginPassword">
+            <button type="button" class="absolute right-4 text-gray-500 hover:text-white transition-colors"
+              (click)="showLoginPassword = !showLoginPassword">
               <i [class]="showLoginPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
             </button>
           </div>
 
           <div class="flex items-center justify-between text-sm mt-1 mb-2">
-            <label class="flex items-center gap-2 cursor-pointer group text-gray-400 hover:text-gray-200 transition-colors">
-              <div class="relative flex items-center justify-center w-5 h-5 rounded border border-gray-600 group-hover:border-neon-purple transition-colors">
+            <label
+              class="flex items-center gap-2 cursor-pointer group text-gray-400 hover:text-gray-200 transition-colors">
+              <div
+                class="relative flex items-center justify-center w-5 h-5 rounded border border-gray-600 group-hover:border-neon-purple transition-colors">
                 <input type="checkbox" class="peer sr-only" [(ngModel)]="rememberMe" name="rememberMe" />
-                <i class="fa-solid fa-check text-[10px] text-neon-purple opacity-0 peer-checked:opacity-100 transition-opacity"></i>
+                <i
+                  class="fa-solid fa-check text-[10px] text-neon-purple opacity-0 peer-checked:opacity-100 transition-opacity"></i>
               </div>
               Lembrar de mim
             </label>
             <a href="#" class="text-neon-purple hover:text-neon-pink transition-colors">Esqueceu a senha?</a>
           </div>
 
-          <button id="login-submit" type="submit" class="w-full bg-gradient-to-r from-neon-purple to-neon-blue text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2" [disabled]="isLoading">
+          <button id="login-submit" type="submit"
+            class="w-full bg-gradient-to-r from-neon-purple to-neon-blue text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+            [disabled]="isLoading">
             <span *ngIf="!isLoading">Entrar <i class="fa-solid fa-arrow-right ml-1"></i></span>
             <i *ngIf="isLoading" class="fa-solid fa-circle-notch fa-spin text-xl"></i>
           </button>
         </form>
 
-        <!-- Form: 2FA Verification -->
         <form class="flex flex-col gap-5" *ngIf="is2faMode" (ngSubmit)="onVerify2Fa()">
           <div class="text-center mb-2">
-            <div class="w-16 h-16 rounded-full bg-neon-purple/20 flex items-center justify-center mx-auto mb-4 animate-bounce">
+            <div
+              class="w-16 h-16 rounded-full bg-neon-purple/20 flex items-center justify-center mx-auto mb-4 animate-bounce">
               <i class="fa-solid fa-key text-neon-purple text-2xl"></i>
             </div>
             <p class="text-sm text-gray-300">
@@ -106,57 +124,64 @@
             </p>
           </div>
 
-          <div class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-purple focus-within:bg-white/10 transition-colors">
+          <div
+            class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-purple focus-within:bg-white/10 transition-colors">
             <div class="absolute left-4 text-gray-500"><i class="fa-solid fa-shield-halved"></i></div>
             <input id="twofactor-code" type="text" placeholder="000000" maxlength="6"
               class="w-full bg-transparent text-white text-center text-2xl tracking-[0.5em] font-mono placeholder-gray-600 py-4 pl-12 pr-4 outline-none rounded-xl"
               [(ngModel)]="twoFactorCode" name="twoFactorCode" autocomplete="one-time-code" />
           </div>
 
-          <button id="2fa-submit" type="submit" class="w-full bg-gradient-to-r from-neon-purple to-neon-blue text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2" [disabled]="isLoading">
+          <button id="2fa-submit" type="submit"
+            class="w-full bg-gradient-to-r from-neon-purple to-neon-blue text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+            [disabled]="isLoading">
             <span *ngIf="!isLoading">Confirmar Código <i class="fa-solid fa-check ml-1"></i></span>
             <i *ngIf="isLoading" class="fa-solid fa-circle-notch fa-spin text-xl"></i>
           </button>
 
-          <button type="button" class="text-sm text-gray-500 hover:text-gray-300 transition-colors text-center" (click)="is2faMode = false; errorMessage = ''; twoFactorCode = ''">
+          <button type="button" class="text-sm text-gray-500 hover:text-gray-300 transition-colors text-center"
+            (click)="is2faMode = false; errorMessage = ''; twoFactorCode = ''">
             Voltar para o login
           </button>
         </form>
 
-        <!-- Form: Register -->
         <form class="flex flex-col gap-4" *ngIf="!isLoginMode" (ngSubmit)="onRegister()">
-          <div class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-pink focus-within:bg-white/10 transition-colors">
+          <div
+            class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-pink focus-within:bg-white/10 transition-colors">
             <div class="absolute left-4 text-gray-500"><i class="fa-solid fa-user"></i></div>
             <input id="reg-username" type="text" placeholder="Nome de Usuário"
               class="w-full bg-transparent text-white placeholder-gray-500 py-4 pl-12 pr-4 outline-none rounded-xl"
               [(ngModel)]="regUsername" name="regUsername" autocomplete="username" />
           </div>
 
-          <div class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-pink focus-within:bg-white/10 transition-colors">
+          <div
+            class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-pink focus-within:bg-white/10 transition-colors">
             <div class="absolute left-4 text-gray-500"><i class="fa-solid fa-envelope"></i></div>
             <input id="reg-email" type="email" placeholder="Email"
               class="w-full bg-transparent text-white placeholder-gray-500 py-4 pl-12 pr-4 outline-none rounded-xl"
               [(ngModel)]="regEmail" name="regEmail" autocomplete="email" />
           </div>
 
-          <div class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-pink focus-within:bg-white/10 transition-colors">
+          <div
+            class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-pink focus-within:bg-white/10 transition-colors">
             <div class="absolute left-4 text-gray-500"><i class="fa-solid fa-lock"></i></div>
-            <input id="reg-password" [type]="showRegPassword ? 'text' : 'password'"
-              placeholder="Senha Forte" 
+            <input id="reg-password" [type]="showRegPassword ? 'text' : 'password'" placeholder="Senha Forte"
               class="w-full bg-transparent text-white placeholder-gray-500 py-4 pl-12 pr-12 outline-none rounded-xl"
               [(ngModel)]="regPassword" name="regPassword" autocomplete="new-password" />
-            <button type="button" class="absolute right-4 text-gray-500 hover:text-white transition-colors" (click)="showRegPassword = !showRegPassword">
+            <button type="button" class="absolute right-4 text-gray-500 hover:text-white transition-colors"
+              (click)="showRegPassword = !showRegPassword">
               <i [class]="showRegPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
             </button>
           </div>
 
-          <div class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-pink focus-within:bg-white/10 transition-colors">
+          <div
+            class="relative flex items-center bg-white/5 border border-white/10 rounded-xl focus-within:border-neon-pink focus-within:bg-white/10 transition-colors">
             <div class="absolute left-4 text-gray-500"><i class="fa-solid fa-shield-halved"></i></div>
-            <input id="reg-confirm" [type]="showRegConfirmPassword ? 'text' : 'password'"
-              placeholder="Confirmar Senha" 
+            <input id="reg-confirm" [type]="showRegConfirmPassword ? 'text' : 'password'" placeholder="Confirmar Senha"
               class="w-full bg-transparent text-white placeholder-gray-500 py-4 pl-12 pr-12 outline-none rounded-xl"
               [(ngModel)]="regConfirmPassword" name="regConfirmPassword" autocomplete="new-password" />
-            <button type="button" class="absolute right-4 text-gray-500 hover:text-white transition-colors" (click)="showRegConfirmPassword = !showRegConfirmPassword">
+            <button type="button" class="absolute right-4 text-gray-500 hover:text-white transition-colors"
+              (click)="showRegConfirmPassword = !showRegConfirmPassword">
               <i [class]="showRegConfirmPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
             </button>
           </div>
@@ -167,21 +192,24 @@
             <a href="#" class="text-neon-pink hover:text-white transition-colors">Política de Privacidade</a>.
           </p>
 
-          <button id="reg-submit" type="submit" class="w-full bg-gradient-to-r from-neon-pink to-neon-purple text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transform hover:-translate-y-0.5 transition-all flex items-center justify-center mt-2" [disabled]="isLoading">
+          <button id="reg-submit" type="submit"
+            class="w-full bg-gradient-to-r from-neon-pink to-neon-purple text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transform hover:-translate-y-0.5 transition-all flex items-center justify-center mt-2"
+            [disabled]="isLoading">
             <span *ngIf="!isLoading">Criar Conta</span>
             <i *ngIf="isLoading" class="fa-solid fa-circle-notch fa-spin text-xl"></i>
           </button>
         </form>
 
-        <!-- Toggle Mode -->
         <div class="mt-8 text-center text-sm text-gray-400">
           <span *ngIf="isLoginMode">
             Não tem uma conta?
-            <button type="button" class="text-white font-medium hover:text-neon-purple ml-1 transition-colors" (click)="toggleMode()">Criar identidade</button>
+            <button type="button" class="text-white font-medium hover:text-neon-purple ml-1 transition-colors"
+              (click)="toggleMode()">Criar identidade</button>
           </span>
           <span *ngIf="!isLoginMode">
             Já é um habitante?
-            <button type="button" class="text-white font-medium hover:text-neon-pink ml-1 transition-colors" (click)="toggleMode()">Acessar</button>
+            <button type="button" class="text-white font-medium hover:text-neon-pink ml-1 transition-colors"
+              (click)="toggleMode()">Acessar</button>
           </span>
         </div>
       </div>

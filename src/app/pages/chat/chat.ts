@@ -42,8 +42,7 @@ export class ChatComponent implements OnInit {
 
   async ngOnInit() {
     this.loadUser();
-    
-    // Segurança com chaves no chat: Gera par ECDH e deriva segredo Quimera V3 local
+
     try {
       const myJwk = await this.crypto.generateMyKeys();
       await this.crypto.computeSharedSecret(myJwk);
@@ -68,16 +67,15 @@ export class ChatComponent implements OnInit {
     channel.active = true;
     this.currentChannelName = channel.name;
     this.messages = [];
-    
+
     setTimeout(() => {
-        this.cdr.detectChanges();
+      this.cdr.detectChanges();
     }, 100);
   }
 
   sendMessage() {
     if (!this.newMessage.trim()) return;
 
-    // Encripta e Loga no Console
     const encrypted = this.crypto.encrypt(this.newMessage);
     console.log('🔒 [Chat] Msg Cifrada:', encrypted);
 
@@ -90,8 +88,8 @@ export class ChatComponent implements OnInit {
 
     this.newMessage = '';
     setTimeout(() => {
-        const list = document.getElementById('messages-list');
-        if (list) list.scrollTop = list.scrollHeight;
+      const list = document.getElementById('messages-list');
+      if (list) list.scrollTop = list.scrollHeight;
     }, 50);
   }
 

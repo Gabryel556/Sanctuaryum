@@ -1,106 +1,116 @@
 <div class="flex flex-col h-[calc(100vh-60px)] bg-[#0A0A0F] text-white overflow-hidden">
-  
-  <!-- Nexus Horizontal Bar (Servers) -->
-  <nav class="h-20 bg-[#14141c]/80 backdrop-blur-md border-b border-white/5 flex items-center px-6 gap-4 overflow-x-auto custom-scrollbar shrink-0">
+
+  <nav
+    class="h-20 bg-[#14141c]/80 backdrop-blur-md border-b border-white/5 flex items-center px-6 gap-4 overflow-x-auto custom-scrollbar shrink-0">
     <div class="flex items-center gap-4">
-      <button class="w-12 h-12 rounded-2xl bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center text-xl font-bold hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] transition-all shrink-0">
+      <button
+        class="w-12 h-12 rounded-2xl bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center text-xl font-bold hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] transition-all shrink-0">
         <i class="fa-solid fa-compass text-white"></i>
       </button>
       <div class="w-px h-8 bg-white/10 shrink-0"></div>
     </div>
-    
-    <!-- Servidores (Mocks por enquanto, mas com visual novo) -->
+
     <div class="flex gap-4 items-center">
-      <button class="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:border-neon-purple/50 hover:bg-neon-purple/10 flex items-center justify-center transition-all shrink-0">
+      <button
+        class="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:border-neon-purple/50 hover:bg-neon-purple/10 flex items-center justify-center transition-all shrink-0">
         <span class="font-bold text-lg text-white/70 group-hover:text-neon-purple">S</span>
-        <div class="absolute -bottom-2 w-1 h-1 rounded-full bg-neon-purple opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div
+          class="absolute -bottom-2 w-1 h-1 rounded-full bg-neon-purple opacity-0 group-hover:opacity-100 transition-opacity">
+        </div>
       </button>
 
-      <button class="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:border-neon-blue/50 hover:bg-neon-blue/10 flex items-center justify-center transition-all shrink-0">
+      <button
+        class="group relative w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:border-neon-blue/50 hover:bg-neon-blue/10 flex items-center justify-center transition-all shrink-0">
         <span class="font-bold text-lg text-white/70 group-hover:text-neon-blue">A</span>
       </button>
 
-      <button class="w-12 h-12 rounded-full border border-dashed border-white/20 text-white/30 hover:border-white/50 hover:text-white/70 flex items-center justify-center transition-all shrink-0">
+      <button
+        class="w-12 h-12 rounded-full border border-dashed border-white/20 text-white/30 hover:border-white/50 hover:text-white/70 flex items-center justify-center transition-all shrink-0">
         <i class="fa-solid fa-plus"></i>
       </button>
     </div>
   </nav>
 
   <div class="flex flex-1 min-h-0">
-    <!-- Main Chat Content -->
-    <main class="flex-1 flex flex-col min-w-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a1a2e]/20 via-[#0A0A0F] to-[#0A0A0F]">
-      
-      <!-- Frequencies (Channels) Header -->
-      <header class="h-16 border-b border-white/5 flex items-center px-6 gap-6 shrink-0 bg-[#14141c]/40 backdrop-blur-sm">
+    <main
+      class="flex-1 flex flex-col min-w-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a1a2e]/20 via-[#0A0A0F] to-[#0A0A0F]">
+
+      <header
+        class="h-16 border-b border-white/5 flex items-center px-6 gap-6 shrink-0 bg-[#14141c]/40 backdrop-blur-sm">
         <div class="flex items-center gap-2">
-          <h2 class="text-lg font-bold text-white tracking-wide">Sanctuaryum <span class="text-neon-purple px-2">/</span></h2>
+          <h2 class="text-lg font-bold text-white tracking-wide">Sanctuaryum <span
+              class="text-neon-purple px-2">/</span></h2>
         </div>
-        
-        <!-- Frequencies Tabs -->
+
         <div class="flex items-center gap-2 overflow-x-auto custom-scrollbar flex-1">
-          <button *ngFor="let channel of channels"
-                  (click)="switchChannel(channel)"
-                  class="px-4 py-2 rounded-full text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-2"
-                  [ngClass]="channel.active ? 'bg-neon-purple/20 text-neon-purple border border-neon-purple/30 shadow-[0_0_10px_rgba(139,92,246,0.2)]' : 'text-white/50 hover:bg-white/5 hover:text-white/80'">
-            <i [class]="channel.type === 'voice' ? 'fa-solid fa-microphone-lines text-xs' : 'fa-solid fa-hashtag text-xs'"></i>
+          <button *ngFor="let channel of channels" (click)="switchChannel(channel)"
+            class="px-4 py-2 rounded-full text-sm font-semibold transition-all whitespace-nowrap flex items-center gap-2"
+            [ngClass]="channel.active ? 'bg-neon-purple/20 text-neon-purple border border-neon-purple/30 shadow-[0_0_10px_rgba(139,92,246,0.2)]' : 'text-white/50 hover:bg-white/5 hover:text-white/80'">
+            <i
+              [class]="channel.type === 'voice' ? 'fa-solid fa-microphone-lines text-xs' : 'fa-solid fa-hashtag text-xs'"></i>
             {{ channel.name }}
           </button>
         </div>
 
         <div class="flex items-center gap-3 text-white/40">
-          <button class="w-8 h-8 rounded-full hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center"><i class="fa-solid fa-phone"></i></button>
-          <button class="w-8 h-8 rounded-full hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center"><i class="fa-solid fa-video"></i></button>
+          <button
+            class="w-8 h-8 rounded-full hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center"><i
+              class="fa-solid fa-phone"></i></button>
+          <button
+            class="w-8 h-8 rounded-full hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center"><i
+              class="fa-solid fa-video"></i></button>
         </div>
       </header>
 
-      <!-- Messages Area -->
       <div class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar" id="messages-list">
-        
-        <!-- Welcome banner -->
         <div class="mb-10 mt-10">
-          <div class="w-16 h-16 rounded-2xl bg-neon-purple/20 border border-neon-purple/30 flex items-center justify-center text-3xl text-neon-purple mb-4 shadow-[0_0_20px_rgba(139,92,246,0.2)]">
+          <div
+            class="w-16 h-16 rounded-2xl bg-neon-purple/20 border border-neon-purple/30 flex items-center justify-center text-3xl text-neon-purple mb-4 shadow-[0_0_20px_rgba(139,92,246,0.2)]">
             <i class="fa-solid fa-hashtag"></i>
           </div>
           <h1 class="text-3xl font-bold mb-2">Bem-vindo à Frequência {{ currentChannelName }}</h1>
-          <p class="text-white/40">Este é o início da frequência de texto. As mensagens enviadas aqui são ofuscadas via Quimera.</p>
+          <p class="text-white/40">Este é o início da frequência de texto. As mensagens enviadas aqui são ofuscadas via
+            Quimera.</p>
         </div>
 
-        <!-- Mensagens -->
         <div *ngFor="let msg of messages" class="flex gap-4 group">
-          <div class="w-10 h-10 rounded-full bg-cover bg-center shrink-0 border border-white/10" [style.backgroundImage]="'url(' + msg.avatar + ')'"></div>
+          <div class="w-10 h-10 rounded-full bg-cover bg-center shrink-0 border border-white/10"
+            [style.backgroundImage]="'url(' + msg.avatar + ')'"></div>
           <div class="flex flex-col min-w-0 flex-1">
             <div class="flex items-baseline gap-2 mb-1">
               <span class="font-bold text-[0.95rem] text-white hover:underline cursor-pointer">{{ msg.username }}</span>
               <span class="text-xs text-white/30">{{ msg.time }}</span>
             </div>
-            
-            <!-- Bolha de Chat Glassmorphism -->
-            <div class="bg-white/5 border border-white/5 rounded-2xl rounded-tl-sm px-4 py-2.5 text-[0.95rem] text-white/80 w-fit max-w-[85%] break-words group-hover:border-white/10 transition-colors">
+
+            <div
+              class="bg-white/5 border border-white/5 rounded-2xl rounded-tl-sm px-4 py-2.5 text-[0.95rem] text-white/80 w-fit max-w-[85%] break-words group-hover:border-white/10 transition-colors">
               {{ msg.text | decrypt }}
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Input Area -->
       <div class="p-6 shrink-0 bg-gradient-to-t from-[#0A0A0F] to-transparent">
-        <div class="bg-[#14141c]/80 backdrop-blur-xl border border-white/10 rounded-2xl flex items-end p-2 focus-within:border-neon-purple/50 focus-within:shadow-[0_0_15px_rgba(139,92,246,0.15)] transition-all">
-          <button class="w-10 h-10 shrink-0 rounded-full text-white/40 hover:text-neon-purple hover:bg-neon-purple/10 flex items-center justify-center transition-colors">
+        <div
+          class="bg-[#14141c]/80 backdrop-blur-xl border border-white/10 rounded-2xl flex items-end p-2 focus-within:border-neon-purple/50 focus-within:shadow-[0_0_15px_rgba(139,92,246,0.15)] transition-all">
+          <button
+            class="w-10 h-10 shrink-0 rounded-full text-white/40 hover:text-neon-purple hover:bg-neon-purple/10 flex items-center justify-center transition-colors">
             <i class="fa-solid fa-plus"></i>
           </button>
-          
-          <textarea 
+
+          <textarea
             class="flex-1 bg-transparent border-none text-white text-[0.95rem] resize-none outline-none max-h-32 min-h-[40px] py-2 px-2 custom-scrollbar"
-            [(ngModel)]="newMessage" 
-            (keydown.enter)="$event.preventDefault(); sendMessage()"
+            [(ngModel)]="newMessage" (keydown.enter)="$event.preventDefault(); sendMessage()"
             placeholder="Enviar mensagem para {{ currentChannelName }}...">
           </textarea>
 
           <div class="flex items-center gap-1 shrink-0 pb-1 pr-1">
-            <button class="w-9 h-9 rounded-full text-white/40 hover:text-neon-pink hover:bg-neon-pink/10 flex items-center justify-center transition-colors">
+            <button
+              class="w-9 h-9 rounded-full text-white/40 hover:text-neon-pink hover:bg-neon-pink/10 flex items-center justify-center transition-colors">
               <i class="fa-solid fa-gift"></i>
             </button>
-            <button class="w-9 h-9 rounded-full text-white/40 hover:text-yellow-400 hover:bg-yellow-400/10 flex items-center justify-center transition-colors">
+            <button
+              class="w-9 h-9 rounded-full text-white/40 hover:text-yellow-400 hover:bg-yellow-400/10 flex items-center justify-center transition-colors">
               <i class="fa-solid fa-face-smile"></i>
             </button>
           </div>
@@ -108,72 +118,89 @@
       </div>
     </main>
 
-    <!-- Sidebar Direita (Membros / Player) -->
     <aside class="w-[280px] bg-[#14141c]/60 backdrop-blur-md border-l border-white/5 flex flex-col shrink-0">
-      
-      <!-- Lista de Membros -->
+
       <div class="flex-1 overflow-y-auto p-4 custom-scrollbar">
         <div class="text-xs font-bold text-white/30 uppercase tracking-widest mb-3 pl-2">
           Habitantes — {{ members.length }}
         </div>
-        
-        <div *ngFor="let member of members" (click)="viewProfile(member)" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition-colors group">
+
+        <div *ngFor="let member of members" (click)="viewProfile(member)"
+          class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition-colors group">
           <div class="relative">
-            <div class="w-8 h-8 rounded-full bg-cover bg-center border border-white/10" [style.backgroundImage]="'url(' + member.avatar + ')'"></div>
-            <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full border-2 border-[#14141c]" [ngClass]="'bg-' + (member.status === 'online' ? 'green-500' : member.status === 'idle' ? 'yellow-500' : member.status === 'dnd' ? 'red-500' : 'gray-500')"></div>
+            <div class="w-8 h-8 rounded-full bg-cover bg-center border border-white/10"
+              [style.backgroundImage]="'url(' + member.avatar + ')'"></div>
+            <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full border-2 border-[#14141c]"
+              [ngClass]="'bg-' + (member.status === 'online' ? 'green-500' : member.status === 'idle' ? 'yellow-500' : member.status === 'dnd' ? 'red-500' : 'gray-500')">
+            </div>
           </div>
           <div class="flex flex-col min-w-0">
-            <span class="text-[0.9rem] font-semibold truncate group-hover:text-white transition-colors" [style.color]="member.color">{{ member.username }}</span>
+            <span class="text-[0.9rem] font-semibold truncate group-hover:text-white transition-colors"
+              [style.color]="member.color">{{ member.username }}</span>
             <span class="text-[0.7rem] text-white/30 truncate" *ngIf="member.bio">{{ member.bio }}</span>
           </div>
         </div>
       </div>
 
-      <!-- User Mini Profile (Movido da esquerda para direita embaixo) -->
       <div class="h-[72px] border-t border-white/5 bg-[#0A0A0F]/80 px-4 flex items-center gap-3 shrink-0">
-        <div class="w-10 h-10 rounded-full bg-cover bg-center shrink-0 border border-white/10" [style.backgroundImage]="'url(' + currentUser.avatar + ')'"></div>
+        <div class="w-10 h-10 rounded-full bg-cover bg-center shrink-0 border border-white/10"
+          [style.backgroundImage]="'url(' + currentUser.avatar + ')'"></div>
         <div class="flex flex-col min-w-0 flex-1">
           <span class="text-[0.9rem] font-bold text-white truncate">{{ currentUser.username }}</span>
           <span class="text-xs text-white/40 truncate">{{ currentUser.tag }}</span>
         </div>
         <div class="flex gap-1">
-          <button class="w-8 h-8 rounded-lg text-white/40 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors"><i class="fa-solid fa-microphone"></i></button>
-          <button class="w-8 h-8 rounded-lg text-white/40 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors"><i class="fa-solid fa-gear"></i></button>
+          <button
+            class="w-8 h-8 rounded-lg text-white/40 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors"><i
+              class="fa-solid fa-microphone"></i></button>
+          <button
+            class="w-8 h-8 rounded-lg text-white/40 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors"><i
+              class="fa-solid fa-gear"></i></button>
         </div>
       </div>
     </aside>
   </div>
 
-  <!-- Profile Modal Overlay -->
-  <div *ngIf="selectedMember" class="absolute inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center animate-fade-in" (click)="closeProfile()">
-    <div class="w-[340px] bg-[#14141c] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative" (click)="$event.stopPropagation()">
-      <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/80 transition-colors z-10" (click)="closeProfile()">
+  <div *ngIf="selectedMember"
+    class="absolute inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center animate-fade-in"
+    (click)="closeProfile()">
+    <div class="w-[340px] bg-[#14141c] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative"
+      (click)="$event.stopPropagation()">
+      <button
+        class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/80 transition-colors z-10"
+        (click)="closeProfile()">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      
+
       <div class="h-[120px] w-full" [style.backgroundColor]="selectedMember.color"></div>
-      
+
       <div class="px-5 pb-6">
         <div class="relative -mt-10 mb-3">
           <div class="w-[84px] h-[84px] rounded-full bg-[#14141c] p-1.5">
-            <div class="w-full h-full rounded-full bg-cover bg-center" [style.backgroundImage]="'url(' + selectedMember.avatar + ')'"></div>
+            <div class="w-full h-full rounded-full bg-cover bg-center"
+              [style.backgroundImage]="'url(' + selectedMember.avatar + ')'"></div>
           </div>
-          <div class="absolute bottom-2 right-2 w-5 h-5 rounded-full border-4 border-[#14141c]" [ngClass]="'bg-' + (selectedMember.status === 'online' ? 'green-500' : selectedMember.status === 'idle' ? 'yellow-500' : selectedMember.status === 'dnd' ? 'red-500' : 'gray-500')"></div>
+          <div class="absolute bottom-2 right-2 w-5 h-5 rounded-full border-4 border-[#14141c]"
+            [ngClass]="'bg-' + (selectedMember.status === 'online' ? 'green-500' : selectedMember.status === 'idle' ? 'yellow-500' : selectedMember.status === 'dnd' ? 'red-500' : 'gray-500')">
+          </div>
         </div>
-        
+
         <h2 class="text-xl font-bold text-white mb-0.5">{{ selectedMember.username }}</h2>
         <span class="text-sm text-white/40">{{ selectedMember.tag }}</span>
-        
+
         <div class="flex flex-wrap gap-2 mt-3 pb-4 border-b border-white/5">
-          <span class="px-2.5 py-1 rounded border border-white/10 bg-white/5 text-[0.65rem] font-bold text-white uppercase tracking-wider">{{ selectedMember.role }}</span>
+          <span
+            class="px-2.5 py-1 rounded border border-white/10 bg-white/5 text-[0.65rem] font-bold text-white uppercase tracking-wider">{{
+            selectedMember.role }}</span>
         </div>
-        
+
         <div class="mt-4">
           <h3 class="text-xs font-bold text-white/50 uppercase tracking-widest mb-2">Sobre Mim</h3>
           <p class="text-sm text-white/70 leading-relaxed">{{ selectedMember.bio }}</p>
         </div>
 
-        <button class="w-full mt-6 bg-gradient-to-r from-neon-purple to-neon-blue py-2.5 rounded-xl font-bold text-sm text-white hover:shadow-[0_4px_15px_rgba(139,92,246,0.3)] transition-all">
+        <button
+          class="w-full mt-6 bg-gradient-to-r from-neon-purple to-neon-blue py-2.5 rounded-xl font-bold text-sm text-white hover:shadow-[0_4px_15px_rgba(139,92,246,0.3)] transition-all">
           Enviar Mensagem
         </button>
       </div>

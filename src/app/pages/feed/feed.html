@@ -1,10 +1,9 @@
-<div class="grid grid-cols-1 lg:grid-cols-[280px_1fr_300px] gap-6 max-w-[1300px] mx-auto p-6 min-h-[calc(100vh-80px)] text-white">
-  
-  <!-- Sidebar Esquerda -->
+<div
+  class="grid grid-cols-1 lg:grid-cols-[280px_1fr_300px] gap-6 max-w-[1300px] mx-auto p-6 min-h-[calc(100vh-80px)] text-white">
+
   <aside class="hidden lg:block sticky top-[90px] h-fit space-y-4">
-    <!-- Perfil Card -->
     <div class="bg-[#14141c]/60 border border-white/5 rounded-2xl p-6 text-center backdrop-blur-md">
-      <div 
+      <div
         class="w-16 h-16 rounded-full mx-auto mb-3 flex items-center justify-center text-xl font-bold transition-all duration-300"
         [ngClass]="currentUser?.active_cosmetic || ''"
         [style.background]="getAvatarColor(currentUser?.username || 'U')">
@@ -12,71 +11,71 @@
       </div>
       <h4 class="text-base font-bold mb-1">{{ currentUser?.username }}</h4>
       <p class="text-xs text-white/30 mb-4">{{ currentUser?.email }}</p>
-      
+
       <div class="flex justify-center gap-6 pt-4 border-t border-white/5">
-        <div class="text-xs text-white/40"><strong class="text-white mr-1 text-neon-purple">{{ currentUser?.sanc_coins || 0 }}</strong> SancCoins</div>
+        <div class="text-xs text-white/40"><strong class="text-white mr-1 text-neon-purple">{{ currentUser?.sanc_coins
+            || 0 }}</strong> SancCoins</div>
       </div>
     </div>
 
-    <!-- Trending -->
     <div class="bg-[#14141c]/60 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
       <h5 class="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Trending</h5>
       <div class="flex flex-wrap gap-2">
-        <span *ngFor="let tag of trendingTags" class="px-3 py-1.5 rounded-full bg-neon-purple/10 border border-neon-purple/20 text-neon-purple text-xs font-semibold cursor-pointer hover:bg-neon-purple/20 transition-all">
+        <span *ngFor="let tag of trendingTags"
+          class="px-3 py-1.5 rounded-full bg-neon-purple/10 border border-neon-purple/20 text-neon-purple text-xs font-semibold cursor-pointer hover:bg-neon-purple/20 transition-all">
           {{ tag }}
         </span>
       </div>
     </div>
   </aside>
 
-  <!-- Feed Principal -->
   <main class="min-w-0">
-    <!-- Compose Box -->
-    <div class="bg-[#14141c]/60 border border-white/5 rounded-2xl p-4 md:p-5 mb-4 backdrop-blur-md transition-all duration-300"
-         [ngClass]="{'border-neon-purple/30 shadow-[0_0_20px_rgba(139,92,246,0.1)]': isComposing}">
+    <div
+      class="bg-[#14141c]/60 border border-white/5 rounded-2xl p-4 md:p-5 mb-4 backdrop-blur-md transition-all duration-300"
+      [ngClass]="{'border-neon-purple/30 shadow-[0_0_20px_rgba(139,92,246,0.1)]': isComposing}">
       <div class="flex items-start gap-3">
-        <div 
+        <div
           class="w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0 transition-all duration-300"
           [ngClass]="currentUser?.active_cosmetic || ''"
           [style.background]="getAvatarColor(currentUser?.username || 'U')">
           {{ getInitial(currentUser?.username || 'U') }}
         </div>
-        <textarea 
+        <textarea
           class="flex-1 bg-transparent border-none text-sm text-white resize-none outline-none py-2.5 min-h-[44px] transition-all"
-          [(ngModel)]="newPostContent"
-          (focus)="isComposing = true"
-          placeholder="No que você está pensando?"
+          [(ngModel)]="newPostContent" (focus)="isComposing = true" placeholder="No que você está pensando?"
           [style.minHeight]="isComposing ? '80px' : '44px'">
         </textarea>
       </div>
-      
-      <div *ngIf="isComposing" class="flex justify-between items-center mt-3 pt-3 border-t border-white/5 animate-fade-in-down">
+
+      <div *ngIf="isComposing"
+        class="flex justify-between items-center mt-3 pt-3 border-t border-white/5 animate-fade-in-down">
         <div class="flex gap-1">
-          <button class="w-9 h-9 rounded-full flex items-center justify-center text-white/30 hover:bg-neon-purple/10 hover:text-neon-purple transition-all"><i class="fa-solid fa-image"></i></button>
-          <button class="w-9 h-9 rounded-full flex items-center justify-center text-white/30 hover:bg-neon-purple/10 hover:text-neon-purple transition-all"><i class="fa-solid fa-face-smile"></i></button>
-          <button class="w-9 h-9 rounded-full flex items-center justify-center text-white/30 hover:bg-neon-purple/10 hover:text-neon-purple transition-all"><i class="fa-solid fa-hashtag"></i></button>
+          <button
+            class="w-9 h-9 rounded-full flex items-center justify-center text-white/30 hover:bg-neon-purple/10 hover:text-neon-purple transition-all"><i
+              class="fa-solid fa-image"></i></button>
+          <button
+            class="w-9 h-9 rounded-full flex items-center justify-center text-white/30 hover:bg-neon-purple/10 hover:text-neon-purple transition-all"><i
+              class="fa-solid fa-face-smile"></i></button>
+          <button
+            class="w-9 h-9 rounded-full flex items-center justify-center text-white/30 hover:bg-neon-purple/10 hover:text-neon-purple transition-all"><i
+              class="fa-solid fa-hashtag"></i></button>
         </div>
-        <button 
-          (click)="createPost()" 
-          [disabled]="!newPostContent.trim()"
+        <button (click)="createPost()" [disabled]="!newPostContent.trim()"
           class="bg-gradient-to-r from-neon-purple to-neon-blue px-6 py-2 rounded-full font-bold text-xs disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_4px_15px_rgba(139,92,246,0.4)] transition-all">
           Publicar
         </button>
       </div>
     </div>
 
-    <!-- Loading -->
     <div *ngIf="isLoadingFeed" class="text-center py-12 flex flex-col items-center gap-4 text-white/30">
       <i class="fa-solid fa-circle-notch fa-spin text-2xl text-neon-purple"></i>
       <span class="text-sm">Carregando feed seguro...</span>
     </div>
 
-    <!-- Posts -->
-    <div *ngFor="let post of posts" class="bg-[#14141c]/60 border border-white/5 rounded-2xl p-5 mb-3 backdrop-blur-md hover:border-white/10 transition-all group">
+    <div *ngFor="let post of posts"
+      class="bg-[#14141c]/60 border border-white/5 rounded-2xl p-5 mb-3 backdrop-blur-md hover:border-white/10 transition-all group">
       <div class="flex items-center gap-3 mb-3">
-        <!-- O post precisará ter a informação do cosmético do autor. Por enquanto, se for o currentUser, aplica. Se não, no futuro o backend trará active_cosmetic_css -->
-        <div 
-          class="w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0"
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0"
           [style.background]="getAvatarColor(post.author_username)">
           {{ getInitial(post.author_username) }}
         </div>
@@ -84,7 +83,9 @@
           <span class="text-sm font-semibold">{{ post.author_username }}</span>
           <span class="text-xs text-white/30">{{ getTimeAgo(post.created_at) }}</span>
         </div>
-        <button class="text-white/20 hover:bg-white/5 hover:text-white/50 w-8 h-8 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"><i class="fa-solid fa-ellipsis"></i></button>
+        <button
+          class="text-white/20 hover:bg-white/5 hover:text-white/50 w-8 h-8 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"><i
+            class="fa-solid fa-ellipsis"></i></button>
       </div>
 
       <div class="text-sm text-white/80 leading-relaxed mb-4 break-words">
@@ -92,26 +93,27 @@
       </div>
 
       <div class="flex gap-1 border-t border-white/5 pt-3">
-        <button 
-          (click)="toggleLike(post)"
+        <button (click)="toggleLike(post)"
           class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all"
           [ngClass]="post.is_liked ? 'text-neon-pink bg-neon-pink/10' : 'text-white/30 hover:bg-white/5 hover:text-white/60'">
           <i [class]="post.is_liked ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
           <span>{{ post.likes_count }}</span>
         </button>
-        <button class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-white/30 hover:bg-white/5 hover:text-white/60 transition-all">
+        <button
+          class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-white/30 hover:bg-white/5 hover:text-white/60 transition-all">
           <i class="fa-regular fa-comment"></i>
           <span>{{ post.comments_count }}</span>
         </button>
-        <button class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-white/30 hover:bg-white/5 hover:text-white/60 transition-all ml-auto">
+        <button
+          class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-white/30 hover:bg-white/5 hover:text-white/60 transition-all ml-auto">
           <i class="fa-solid fa-share-nodes"></i>
         </button>
       </div>
     </div>
 
-    <!-- Empty State -->
     <div *ngIf="!isLoadingFeed && posts.length === 0" class="text-center py-16 px-8">
-      <div class="w-20 h-20 rounded-full bg-neon-purple/10 border border-neon-purple/20 flex items-center justify-center mx-auto mb-6 text-2xl text-neon-purple/40">
+      <div
+        class="w-20 h-20 rounded-full bg-neon-purple/10 border border-neon-purple/20 flex items-center justify-center mx-auto mb-6 text-2xl text-neon-purple/40">
         <i class="fa-solid fa-rss"></i>
       </div>
       <h3 class="text-lg font-bold mb-2">Seu feed está vazio</h3>
@@ -119,20 +121,21 @@
     </div>
   </main>
 
-  <!-- Sidebar Direita -->
   <aside class="hidden lg:block sticky top-[90px] h-fit space-y-4">
     <div class="bg-[#14141c]/60 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
       <h5 class="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Sugestões para você</h5>
       <div class="flex flex-col gap-4">
         <div *ngFor="let user of suggestedUsers" class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0" [style.background]="getAvatarColor(user.username)">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
+            [style.background]="getAvatarColor(user.username)">
             {{ getInitial(user.username) }}
           </div>
           <div class="flex-1 min-w-0 flex flex-col">
             <span class="text-sm font-semibold truncate">{{ user.username }}</span>
             <span class="text-xs text-white/30 truncate">{{ user.bio }}</span>
           </div>
-          <button class="px-3 py-1.5 rounded-full bg-neon-purple/15 border border-neon-purple/30 text-neon-purple text-xs font-bold hover:bg-neon-purple/25 transition-all">
+          <button
+            class="px-3 py-1.5 rounded-full bg-neon-purple/15 border border-neon-purple/30 text-neon-purple text-xs font-bold hover:bg-neon-purple/25 transition-all">
             Seguir
           </button>
         </div>

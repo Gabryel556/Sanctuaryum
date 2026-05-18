@@ -39,7 +39,6 @@ export class DeveloperComponent implements OnInit {
 
     this.developerService.createBot(this.newBotName).subscribe({
       next: (newBot) => {
-        // O token só é retornado na criação e deve ficar visível para o desenvolvedor copiar
         const botWithVisibility = {
           ...newBot,
           tokenVisible: true

@@ -1,242 +1,123 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService, UserPublic } from '../../services/auth.service';
-
-interface SupportActionLog {
-  id: string;
-  operator_username: string;
-  action_type: string;
-  target_username: string | null;
-  details: string;
-  created_at: string;
-}
-
-interface SupportOverview {
-  total_users: number;
-  coins_in_circulation: number;
-  pending_deletions: number;
-  active_bots: number;
-  flagged_posts: number;
-  total_keys: number;
-  recent_actions: SupportActionLog[];
-}
-
-interface SupportUserDetail {
-  id: string;
-  username: string;
-  email: string;
-  created_at: string;
-  sanc_coins: number;
-  active_cosmetic: string | null;
-  avatar_url: string | null;
-  is_verified_artist: boolean;
-  role: string;
-  is_suspended: boolean;
-  deletion_days_remaining: number | null;
-  history: SupportActionLog[];
-}
+import { SupportService } from '../../services/support.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-support',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './support.html',
-  styleUrl: './support.css'
+  templateUrl: './support.html'
 })
 export class SupportComponent implements OnInit {
-  accessKey = '';
-  accessLevel: 'none' | 'pagamento' | 'tecnico' | 'moderacao' | 'master' = 'none';
-  accessGranted = false;
-  errorMessage = '';
-  sessionKey = '';
-  operator: UserPublic | null = null;
+  // Estado de Autenticação
+  supportKey: string = '';
+  isAuthorized: boolean = false;
+  operatorLevel: string = '';
+  operatorName: string = '';
 
-  // Overview / Stats
-  overview: SupportOverview | null = null;
+  // Métricas do Dashboard
+  metrics: any = null;
+  auditTrail: any[] = [];
 
-  // User search & detail
-  searchQuery = '';
-  searchResults: UserPublic[] = [];
-  selectedUser: SupportUserDetail | null = null;
-  selectedUserLoading = false;
+  // Pesquisa e Gerenciamento
+  searchQuery: string = '';
+  searchResults: any[] = [];
+  selectedUser: any = null;
 
-  // Actions fields
-  actionAmount: number | null = null;
-  actionText = '';
-
-  // Demo key generator
-  newKeyGenerated = '';
+  // Formulários de Ação
+  actionAmount: number = 0;
+  actionReason: string = '';
+  actionCosmetic: string = '';
+  actionRole: string = 'membro';
 
   constructor(
-    private http: HttpClient,
+    private supportService: SupportService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    // If the operator has a saved support session key, retrieve it
-    const storedKey = localStorage.getItem('sanc_support_session_key');
-    if (storedKey) {
-      this.accessKey = storedKey;
-      this.verifyKey();
+    const savedKey = localStorage.getItem('sanct_support_key');
+    if (savedKey) {
+      this.supportKey = savedKey;
+      this.authenticate();
     }
   }
 
-  // Obter cabeçalhos com a chave de suporte
-  getSupportHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'X-Support-Key': this.sessionKey,
-      'Content-Type': 'application/json'
-    });
-  }
+  authenticate() {
+    if (!this.supportKey.trim()) return;
 
-  // Gerar Nova Chave de Teste vinculado à conta ativa do usuário
-  generateTestKey() {
-    this.errorMessage = '';
-    const headers = this.authService.getAuthHeaders();
-    this.http.post<{ key_code: string, level: string }>(
-      'http://localhost:3000/api/support/generate-key',
-      { level: 'master' },
-      { headers }
-    ).subscribe({
+    this.supportService.verifyKey(this.supportKey).subscribe({
       next: (res) => {
-        this.newKeyGenerated = res.key_code;
-        this.accessKey = res.key_code;
+        this.isAuthorized = true;
+        this.operatorLevel = res.level;
+        this.operatorName = res.operator.username;
+        localStorage.setItem('sanct_support_key', this.supportKey);
+        this.loadDashboard();
       },
       error: (err) => {
-        this.errorMessage = err.error?.error || 'Erro ao gerar chave de suporte para testes.';
+        alert(err.error?.error || 'Chave inválida ou expirada.');
+        this.logout();
       }
     });
   }
 
-  // Verificar Chave de Suporte
-  verifyKey() {
-    this.errorMessage = '';
-    const key = this.accessKey.trim();
-
-    if (!key) {
-      this.errorMessage = 'Por favor, insira uma chave de acesso.';
-      return;
-    }
-
-    this.http.post<{ key_id: string, operator: UserPublic, level: string }>(
-      'http://localhost:3000/api/support/verify-key',
-      { key }
-    ).subscribe({
+  loadDashboard() {
+    this.supportService.getOverview(this.supportKey).subscribe({
       next: (res) => {
-        this.sessionKey = key;
-        this.operator = res.operator;
-        this.accessLevel = res.level as any;
-        this.accessGranted = true;
-        localStorage.setItem('sanc_support_session_key', key);
-        this.loadOverview();
+        this.metrics = res;
+        this.auditTrail = res.recent_actions;
       },
-      error: (err) => {
-        this.errorMessage = err.error?.error || 'Chave de suporte inválida, inativa ou expirada.';
-        this.accessGranted = false;
-        this.accessLevel = 'none';
-        localStorage.removeItem('sanc_support_session_key');
-      }
+      error: () => this.logout()
     });
   }
 
-  // Carregar Visão Geral do Sistema
-  loadOverview() {
-    this.http.get<SupportOverview>(
-      'http://localhost:3000/api/support/overview',
-      { headers: this.getSupportHeaders() }
-    ).subscribe({
-      next: (res) => {
-        this.overview = res;
-      },
-      error: (err) => {
-        this.errorMessage = 'Erro ao carregar visão geral: ' + (err.error?.error || err.message);
-      }
-    });
-  }
-
-  // Buscar Usuário Independente
   searchUsers() {
-    if (!this.searchQuery.trim()) {
-      this.searchResults = [];
-      return;
-    }
-
-    this.http.get<UserPublic[]>(
-      `http://localhost:3000/api/support/users/search?q=${encodeURIComponent(this.searchQuery)}`,
-      { headers: this.getSupportHeaders() }
-    ).subscribe({
-      next: (res) => {
-        this.searchResults = res;
-      },
-      error: (err) => {
-        console.error('Erro na busca de habitantes:', err);
-      }
+    if (!this.searchQuery.trim()) return;
+    this.supportService.searchUsers(this.supportKey, this.searchQuery).subscribe({
+      next: (res) => this.searchResults = res,
+      error: (err) => console.error(err)
     });
   }
 
-  // Selecionar Habitante e ver Detalhes Exaustivos
-  selectUser(user: UserPublic) {
-    this.selectedUserLoading = true;
-    this.selectedUser = null;
-
-    this.http.get<SupportUserDetail>(
-      `http://localhost:3000/api/support/users/${user.id}/details`,
-      { headers: this.getSupportHeaders() }
-    ).subscribe({
-      next: (res) => {
-        this.selectedUser = res;
-        this.selectedUserLoading = false;
-        // Limpar inputs de ações
-        this.actionAmount = null;
-        this.actionText = '';
-      },
-      error: (err) => {
-        alert('Erro ao carregar detalhes do habitante: ' + (err.error?.error || err.message));
-        this.selectedUserLoading = false;
-      }
+  selectUser(userId: string) {
+    this.supportService.getUserDetails(this.supportKey, userId).subscribe({
+      next: (res) => this.selectedUser = res,
+      error: (err) => alert('Erro ao buscar detalhes.')
     });
   }
 
-  // Executar Ação no Usuário com Auditoria
   executeAction(actionType: string) {
     if (!this.selectedUser) return;
 
-    const payload = {
-      action_type: actionType,
-      amount: this.actionAmount,
-      text: this.actionText
-    };
+    const payload: any = { action_type: actionType };
 
-    this.http.post<{ success: boolean, message: string }>(
-      `http://localhost:3000/api/support/users/${this.selectedUser.id}/action`,
-      payload,
-      { headers: this.getSupportHeaders() }
-    ).subscribe({
+    if (['MINT_COINS', 'DEBIT_COINS'].includes(actionType)) {
+      payload.amount = this.actionAmount;
+    } else if (actionType === 'BAN') {
+      if (!this.actionReason) return alert('Informe o motivo da suspensão.');
+      payload.text = this.actionReason;
+    } else if (actionType === 'SET_COSMETIC') {
+      payload.text = this.actionCosmetic;
+    } else if (actionType === 'SET_ROLE') {
+      payload.text = this.actionRole;
+    }
+
+    this.supportService.executeAction(this.supportKey, this.selectedUser.id, payload).subscribe({
       next: (res) => {
-        alert(res.message || 'Ação de suporte executada com sucesso.');
-        // Recarregar dados do habitante selecionado e visão geral
-        this.selectUser({ id: this.selectedUser!.id, username: this.selectedUser!.username, email: this.selectedUser!.email, created_at: this.selectedUser!.created_at });
-        this.loadOverview();
+        alert(res.message || 'Ação executada com sucesso.');
+        this.selectUser(this.selectedUser.id); // Recarrega os dados do usuário
+        this.loadDashboard(); // Atualiza as métricas globais
       },
-      error: (err) => {
-        alert('Erro ao executar ação de suporte: ' + (err.error?.error || err.message));
-      }
+      error: (err) => alert(err.error?.error || 'Falha ao executar ação.')
     });
   }
 
-  // Encerrar Sessão
-  logoutSupport() {
-    this.accessGranted = false;
-    this.accessLevel = 'none';
-    this.accessKey = '';
-    this.sessionKey = '';
-    this.operator = null;
-    this.overview = null;
-    this.searchResults = [];
+  logout() {
+    this.isAuthorized = false;
+    this.supportKey = '';
     this.selectedUser = null;
-    this.newKeyGenerated = '';
-    localStorage.removeItem('sanc_support_session_key');
+    localStorage.removeItem('sanct_support_key');
   }
 }

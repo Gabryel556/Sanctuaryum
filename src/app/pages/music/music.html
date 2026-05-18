@@ -6,13 +6,11 @@
         <button class="waves-tab" [class.active]="activeTab === 'colecao'" (click)="activeTab = 'colecao'">
             <i class="fa-solid fa-layer-group"></i> Sua Coleção
         </button>
-        <button class="waves-tab artist-btn" [class.active]="activeTab === 'artista'"
-            (click)="activeTab = 'artista'">
+        <button class="waves-tab artist-btn" [class.active]="activeTab === 'artista'" (click)="activeTab = 'artista'">
             <i class="fa-solid fa-star"></i> Seja um Artista
         </button>
     </nav>
 
-    <!-- TAB INÍCIO -->
     <div class="tab-content" *ngIf="activeTab === 'inicio'">
         <div class="waves-hero">
             <div class="hero-tag-row">
@@ -72,7 +70,6 @@
         </div>
     </div>
 
-    <!-- TAB SUA COLEÇÃO -->
     <div class="tab-content" *ngIf="activeTab === 'colecao'">
         <div class="waves-section">
             <div class="section-header">
@@ -124,7 +121,6 @@
         </div>
     </div>
 
-    <!-- TAB SEJA UM ARTISTA -->
     <div class="tab-content" *ngIf="activeTab === 'artista'">
         <div class="artist-section" *ngIf="artistStatus === 'none'">
             <div class="artist-hero">
@@ -176,8 +172,7 @@
                     <input type="text" [(ngModel)]="artistForm.socialLinks" name="socialLinks"
                         placeholder="SoundCloud, YouTube, Bandcamp..." class="form-input">
                 </div>
-                <button type="submit" class="btn-apply"
-                    [disabled]="!artistForm.artistName || !artistForm.bio">
+                <button type="submit" class="btn-apply" [disabled]="!artistForm.artistName || !artistForm.bio">
                     <i class="fa-solid fa-paper-plane"></i> Enviar para Verificação
                 </button>
             </form>

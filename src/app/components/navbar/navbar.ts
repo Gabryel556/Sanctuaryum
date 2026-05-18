@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Necessário para o *ngIf
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',

@@ -67,13 +67,11 @@ export class FeedComponent implements OnInit {
   }
 
   toggleLike(post: Post) {
-    // Otimista
     post.is_liked = !post.is_liked;
     post.likes_count += post.is_liked ? 1 : -1;
-    
+
     this.postService.likePost(post.id).subscribe({
       error: (err) => {
-        // Reverter em caso de erro
         post.is_liked = !post.is_liked;
         post.likes_count += post.is_liked ? 1 : -1;
         console.error('Erro ao curtir post', err);

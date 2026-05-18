@@ -48,12 +48,12 @@ export class StoreComponent implements OnInit {
 
   buy(item: CosmeticItem) {
     if (!this.storeData || this.storeData.balance < item.price) return;
-    
+
     if (confirm(`Deseja comprar ${item.name} por ${item.price} SancCoins?`)) {
       this.storeService.buyItem(item.id).subscribe({
         next: () => {
           alert('Compra realizada com sucesso!');
-          this.loadStore(); // Recarrega saldo e inventário
+          this.loadStore();
         },
         error: (err) => {
           alert(err.error?.error || 'Erro ao comprar item');
@@ -70,7 +70,6 @@ export class StoreComponent implements OnInit {
         }
         if (this.currentUser) {
           this.currentUser.active_cosmetic = item.css_class;
-          // Update the observable state to propagate everywhere immediately
           this.authService.updateUserCosmetic(item.css_class);
         }
       },
