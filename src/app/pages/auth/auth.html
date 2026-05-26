@@ -53,8 +53,8 @@
           <p class="text-gray-400 text-sm">Insira suas credenciais para acessar o Sanctuaryum.</p>
         </div>
         <div class="mb-8 transition-all" *ngIf="!isLoginMode">
-          <h2 class="text-3xl font-bold mb-2 tracking-tight text-white">Criar Identidade</h2>
-          <p class="text-gray-400 text-sm">Sua jornada criptografada começa aqui.</p>
+          <h2 class="text-3xl font-bold mb-2 tracking-tight text-white">Criar conta</h2>
+          <p class="text-gray-400 text-sm">Sua jornada começa aqui.</p>
         </div>
 
         <div
@@ -204,7 +204,7 @@
           <span *ngIf="isLoginMode">
             Não tem uma conta?
             <button type="button" class="text-white font-medium hover:text-neon-purple ml-1 transition-colors"
-              (click)="toggleMode()">Criar identidade</button>
+              (click)="toggleMode()">Criar conta</button>
           </span>
           <span *ngIf="!isLoginMode">
             Já é um habitante?
